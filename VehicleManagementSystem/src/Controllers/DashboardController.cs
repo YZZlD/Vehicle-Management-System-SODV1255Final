@@ -4,18 +4,18 @@ namespace VehicleManagementSystem.Controllers
 {
     public class DashboardController : Controller
     {
-        private readonly CustomerRepository _customerRepository;
+        // private readonly CustomerRepository _customerRepository;
 
-        private readonly VehicleRepository _vehicleRepository;
+        // private readonly VehicleRepository _vehicleRepository;
 
-        private readonly ReservationRepository _reservationRepository;
+        // private readonly ReservationRepository _reservationRepository;
 
-        public DashboardController(CustomerRepository customerRepository, VehicleRepository vehicleRepository, ReservationRepository reservationRepository)
-        {
-            _customerRepository = customerRepository;
-            _vehicleRepository = vehicleRepository;
-            _reservationRepository = reservationRepository;
-        }
+        // public DashboardController(CustomerRepository customerRepository, VehicleRepository vehicleRepository, ReservationRepository reservationRepository)
+        // {
+        //     _customerRepository = customerRepository;
+        //     _vehicleRepository = vehicleRepository;
+        //     _reservationRepository = reservationRepository;
+        // }
 
         public async Task<IActionResult> Index()
         {
