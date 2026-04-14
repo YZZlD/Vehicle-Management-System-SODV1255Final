@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 // using VehicleManagementSystem.Repositories;
 // using VehicleManagementSystem.Models;
@@ -36,9 +37,9 @@ namespace VehicleManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var customer = _customerRepository.GetCustomerByID(id);
+            var customer = await _customerRepository.GetCustomerByID(id);
             //THIS WILL BE REPLACED FOR A 404 ROUTE FOR HANDLING NOT FOUND
             //MOST LIKELY GOING TO BE DONE THROUGH REDIRECTSWITHSTATUSCODES SO THIS SHOULD NOT CHANGE
             if (!customer) return NotFound();
