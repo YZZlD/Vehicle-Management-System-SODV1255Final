@@ -62,7 +62,7 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var customer = _customerRepository.GetCustomerByID(id);
+            var customer = await _customerRepository.GetCustomerByID(id);
             if(!customer) return NotFound();
 
             await _customerRepository.DeleteCustomer(id);

@@ -25,10 +25,11 @@ namespace VehicleManagementSystem.Controllers
             List<string> customerList = customers.Split(',').ToList();
 
             //Basic first filtering implementation (UNTESTED)
+            //Logic error here as it will return nothing if either vehicle or customer are empty.
             var filteredReservations = reservations
                                         .Where(r => r.DateTime >= lowerboundDate && r.DateTime <= upperboundDate)
-                                        .Where(r => vehicleList.Contains(r.vehicle))
-                                        .Where(r => vehicleList.Contains(r.vehicle))
+                                        .Where(r => vehicleList.Contains(r.Vehicle))
+                                        .Where(r => customerList.Contains(r.Customer))
                                         .ToList();
 
             //Basic logic grabs for different necessary information for the view (UNTESTED)
