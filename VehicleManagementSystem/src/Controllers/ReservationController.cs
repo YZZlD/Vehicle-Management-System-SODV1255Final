@@ -40,6 +40,16 @@ namespace VehicleManagementSystem.Controllers
             */
         }
 
+        /*
+
+        LOOKING TO IMPLEMENT THIS FLOW FOR CREATION.
+            1. Pass view with date range selector
+            2. Post to controller that filters vehicle availability and passes it to a viewbag to return next form view
+            3. Form view with filtered available vehicles and all customers post
+            4. Use vehicle and customer information with dates to make a new reservation
+
+        */
+
         public async Task<IActionResult> Edit(int id)
         {
             var reservation = _reservationRepository.GetReservationById(id);
