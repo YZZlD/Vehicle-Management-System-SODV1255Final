@@ -1,0 +1,108 @@
+@* @model VehicleManagementSystem.Model.DashboardViewModel *@
+
+<div>
+    <div>
+        <div>
+            <h1>Vehicles</h1>
+            <h1>@Model.Vehicles.Count</h1>
+            <a asp-controller="Vehicle" asp-action="Create">+ ADD VEHICLE</a>
+        </div>
+        <div>
+            <h1>Vehicle Snapshot</h1>
+            <div>
+                @foreach(var vehicle in Model.Vehicles)
+                {
+                    <div style="background-image: url('@(vehicle.ImageUrl ?? "/[PLACEHOLDER IMAGE LOCATION]")')">
+                        <div>
+                            <h3>@vehicle.Make @vehicle.Model</h3>
+                            <p>@vehicle.LicensePlate</p>
+                            <p>@vehicle.PriceRate</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <h1>Customers</h1>
+            <h1>@Model.Customers.Count</h1>
+            <a asp-controller="Customer" asp-action="Create">+ ADD CUSTOMER</a>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach(var customer in Model.Customers)
+                    {
+                        <tr>
+                            <td>@customer.FirstName @customer.LastName</td>
+                            <td>@customer.Email</td>
+                            <td>@customer.Phone</td>
+                            <td>@customer.Age</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@customer.CustomerId">Edit Customer</a>
+                                <a asp-action="Delete" asp-route-id="@customer.CustomerId">Delete Customer</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <h1>Reservations</h1>
+            <h1>@Model.Reservations.Count</h1>
+            <a asp-controller="Reservation" asp-action="Create">+ ADD RESERVATION</a>
+        </div>
+
+        <div>
+            @* RESERVATIONS UI GOES HERE *@
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <h1>Vehicle Availability Distribution</h1>
+        </div>
+
+        <div>
+            <h1>Upcoming Rentals Due</h1>
+            @foreach(var reservation in @Model.UpcomingRentals)
+            {
+                <div>
+                    <p>@reservation.Customer?.FirstName @reservation.Customer?.LastName</p>
+                    <p>@reservation.Vehicle?.Make @reservation.Vehicle?.Model</p>
+                    <p>@reservation.DueDate.ToString("dd-mm-yyyy")</p>
+                </div>
+            }
+        </div>
+    </div>
+
+
+    <div>
+        <h1>OVERDUE ALERTS</h1>
+        @foreach(var reservation in @Model.OverdueRentals)
+        {
+            <div>
+                <p>@reservation.Customer?.FirstName @reservation.Customer?.LastName</p>
+                <p>@reservation.Vehicle?.Make @reservation.Vehicle?.Model</p>
+                <p>@reservation.DueDate.ToString("dd-mm-yyyy")</p>
+                @* THIS WILL BE STYLED DANGER STYLE *@
+            </div>
+        }
+    </div>
+</div>
