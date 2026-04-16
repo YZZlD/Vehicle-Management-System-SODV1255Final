@@ -1,0 +1,23 @@
+@* @model VehicleManagementSystem.Models.Vehicle *@
+
+<h1>Create New Vehicle</h1>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label asp-for="Model"></label>
+        <input asp-for="Model" />
+    </div>
+
+    <div>
+        <label asp-for="Make"></label>
+        <input asp-for="Make" />
+    </div>
+
+    <div>
+        <label asp-for="LicensePlate"></label>
+        <input asp-for="LicensePlate" />
+    </div>
+
+    <button type="submit">Create Vehicle</button>
+    <a asp-action="Index">Cancel</a>
+</form>

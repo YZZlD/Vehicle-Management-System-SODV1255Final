@@ -55,12 +55,17 @@ namespace VehicleManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             var vehicle = await _vehicleRepository.GetVehicleById(id);
-            if(!vehicle) return NotFound();
+            if(vehicle == null) return NotFound();
 
+            return View(vehicle);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteVehicle(int id)
+        {
             await _vehicleRepository.DeleteVehicle(id);
 
             return RedirectToAction("Index");
