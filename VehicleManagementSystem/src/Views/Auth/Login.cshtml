@@ -1,0 +1,32 @@
+@* @model VehicleManagementSystem.Model.User *@
+
+<h1>Login</h1>
+
+<div>
+    <div>
+        <form asp-action="Login" method="post">
+            <div>
+                <label for="username"></label>
+                <input for="username" name="username" placeholder="Username"/>
+            </div>
+
+            <div>
+                <label for="password"></label>
+                <input for="password" name="password" placeholder="Password"/>
+            </div>
+
+            @if(ViewBag.Error != null)
+            {
+                <p>@ViewBag.Error</p>
+            }
+
+            @if(TempData[key: "LogoutMessage"] != null)
+            {
+                <p>@TempData["LogoutMessage"]</p>
+            }
+
+            <button type="submit">Login</button>
+            <a asp-action="Register">Register</a>
+        </form>
+    </div>
+</div>
