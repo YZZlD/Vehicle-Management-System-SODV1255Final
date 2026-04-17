@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using VehicleManagementSystem.src.Models;
 using VehicleManagementSystem.src.Repositories;
 
 namespace VehicleManagementSystem.Controllers
@@ -23,7 +24,7 @@ namespace VehicleManagementSystem.Controllers
                 return View();
             }
 
-            var user = await _authRepository.CheckUserCredentials(username, password);
+            var user = await _authRepository.checkcreds(username, password);
 
             if (user == null)
             {
@@ -31,8 +32,8 @@ namespace VehicleManagementSystem.Controllers
                 return View();
             }
 
-            HttpContext.Session.SetInt32("UserID", user.ID);
-            HttpContext.Session.SetString("Username", user.Username);
+            HttpContext.Session.SetInt32("UserID", user.staffid);
+            HttpContext.Session.SetString("Username", user.username);
             return RedirectToAction("Index", "Dashboard");
         }
 
@@ -41,9 +42,9 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(string username, string password)
         {
-            User user = new User { Username = username, Password = password};
+            STAFFMODEL user = new STAFFMODEL { username = username, password = password};
 
-            await _userRepository.AddUser(user);
+            _authRepository.AddUser(user);
 
             return RedirectToAction("Login");
         }
