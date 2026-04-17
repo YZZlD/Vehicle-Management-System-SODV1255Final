@@ -10,5 +10,7 @@ namespace VehicleManagementSystem.src.Models
         public string licenseplate { get; set; }
         public string model { get; set; }
         public string make { get; set; }
+        public double price { get; set; }
+        public string imagelinkplaintext { get; set; }
     }
 }
