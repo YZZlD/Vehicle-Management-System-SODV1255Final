@@ -1,33 +1,37 @@
 @model VehicleManagementSystem.src.Models.VehicleDTO
 
-<h1>Create New Vehicle</h1>
+<div class="page-center">
+    <div class="form-card">
+        <h2>Create New Vehicle</h2>
 
-<form asp-action="Create" method="post">
-    <div>
-        <label asp-for="Model">Model: </label>
-        <input asp-for="Model" />
+        <form asp-action="Create" method="post">
+            <div class="form-group">
+                <label asp-for="Model">Model: </label>
+                <input asp-for="Model" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Make">Make: </label>
+                <input asp-for="Make" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LicensePlate">License Plate: </label>
+                <input asp-for="LicensePlate" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PriceRate">Price Rate ($/day): </label>
+                <input asp-for="PriceRate" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImageURL">Image URL: </label>
+                <input asp-for="ImageURL" />
+            </div>
+
+            <button class="btn" type="submit">Create Vehicle</button>
+            <a asp-action="Index">Cancel</a>
+        </form>
     </div>
-
-    <div>
-        <label asp-for="Make">Make: </label>
-        <input asp-for="Make" />
-    </div>
-
-    <div>
-        <label asp-for="LicensePlate">License Plate: </label>
-        <input asp-for="LicensePlate" />
-    </div>
-
-    <div>
-        <label asp-for="PriceRate">Price Rate ($/day): </label>
-        <input asp-for="PriceRate" />
-    </div>
-
-    <div>
-        <label asp-for="ImageURL">Image URL: </label>
-        <input asp-for="ImageURL" />
-    </div>
-
-    <button type="submit">Create Vehicle</button>
-    <a asp-action="Index">Cancel</a>
-</form>
+</div>

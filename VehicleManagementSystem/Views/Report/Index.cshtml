@@ -4,71 +4,96 @@
     <div>
         <h1>Reports</h1>
         <div>
-            <form asp-action="Index" method="get">
-                <label for="dateFrom">Date From</label>
-                <input id="dateFrom" name="dateFrom" type="date" />
+            <form asp-action="Index" method="get" class="filter-form">
+                <div class="filter-group">
+                    <label for="dateFrom">Date From</label>
+                    <input id="dateFrom" name="dateFrom" type="date" />
+                </div>
 
-                <label for="dateTo">Date To</label>
-                <input id="dateTo" name="dateTo" type="date" />
+                <div class="filter-group">
+                    <label for="dateTo">Date To</label>
+                    <input id="dateTo" name="dateTo" type="date" />
+                </div>
 
-                <label for="vehicleMake">Make</label>
-                <select id="vehicleMake" name="vehicleMake">
-                    <option value="">All Makes</option>
-                    @foreach(var make in Model.Makes)
-                    {
-                        <option value="@make">@make</option>
-                    }
-                </select>
+                <div class="filter-group">
+                    <label for="vehicleMake">Make</label>
+                    <select id="vehicleMake" name="vehicleMake">
+                        <option value="">All Makes</option>
+                        @foreach(var make in Model.Makes)
+                        {
+                            <option value="@make">@make</option>
+                        }
+                    </select>
+                </div>
 
+                <div class="filter-group">
+                    <label for="minAge">Min Age</label>
+                    <input id="minAge" name="minAge" type="number" />
+                </div>
 
-                <label for="minAge">Min Age</label>
-                <input id="minAge" name="minAge" type="number" />
+                <div class="filter-group">
+                    <label for="maxAge">Max Age</label>
+                    <input id="maxAge" name="maxAge" type="number" />
+                </div>
 
-                <label for="maxAge">Max Age</label>
-                <input id="maxAge" name="maxAge" type="number" />
-
-                <button type="submit">Generate Reservation Report</button>
+                <div class="filter-actions">
+                    <button class="btn" type="submit">Generate Reservation Report</button>
+                </div>
             </form>
         </div>
     </div>
 
     <div>
-        <h1>Summary</h1>
-        <div>
-            <div>@Model.TotalReservations</div>
-            <div>@Model.TotalRevenue.ToString("C")</div>
-            <div>@Model.ActiveRentals</div>
-            <div>@Model.MostPopularVehicle</div>
+        <h2>Summary</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-title">Total Reservations</div>
+                <div class="stat-value">@Model.TotalReservations</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-title">Total Revenue</div>
+                <div class="stat-value">@Model.TotalRevenue.ToString("C")</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-title">Active Rentals</div>
+                <div class="stat-value">@Model.ActiveRentals</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-title">Most Popular Vehicle</div>
+                <div class="stat-value">@Model.MostPopularVehicle</div>
+            </div>
+
         </div>
     </div>
 
-    <div>
+    <div class="table-container">
         <h1>RESERVATIONS INCLUDED IN REPORT</h1>
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Customer</th>
-                        <th>Vehicle</th>
-                        <th>Reserved Date</th>
-                        <th>Due Date</th>
-                        <th>Price Total</th>
-                    </tr>
-                </thead>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Vehicle</th>
+                    <th>Reserved Date</th>
+                    <th>Due Date</th>
+                    <th>Price Total</th>
+                </tr>
+            </thead>
 
-                <tbody>
-                    @foreach(var reservation in Model.Reservations)
-                    {
-                        <tr>
-                            <td>@reservation.user?.fname @reservation.user?.lname</td>
-                            <td>@reservation.vehicle.make @reservation.vehicle.model </td>
-                            <td>@reservation.reservedate.ToString("MMM dd, yyyy")</td>
-                            <td>@reservation.duedate.ToString("MMM dd, yyyy")</td>
-                            <td>@reservation.price.ToString("C")</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+            <tbody>
+                @foreach(var reservation in Model.Reservations)
+                {
+                    <tr>
+                        <td>@reservation.user?.fname @reservation.user?.lname</td>
+                        <td>@reservation.vehicle.make @reservation.vehicle.model </td>
+                        <td>@reservation.reservedate.ToString("MMM dd, yyyy")</td>
+                        <td>@reservation.duedate.ToString("MMM dd, yyyy")</td>
+                        <td>@reservation.price.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

@@ -29,6 +29,10 @@ builder.Services.AddScoped<STAFFREPO>();
 
 var app = builder.Build();
 
+app.UseStaticFiles();
+
+app.UseRouting();
+
 app.UseSession();
 
 app.MapDefaultControllerRoute();

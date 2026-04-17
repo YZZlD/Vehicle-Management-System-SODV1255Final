@@ -1,23 +1,23 @@
 @model List<VehicleManagementSystem.src.Models.VEHICLEMODEL>
 
-<div>
+<div class="page-header">
     <h2>Vehicles</h2>
-    <a asp-action="Create">+ ADD NEW VEHICLE</a>
+    <a asp-action="Create" class="link-button">+ ADD NEW VEHICLE</a>
 </div>
 
-<div>
+<div class="vehicle-grid">
     @foreach(var vehicle in Model)
     {
-        <div style="background-image: url('@(vehicle.imagelinkplaintext ?? "/[PLACEHOLDER IMAGE LOCATION]")')">
-            <div>
-                <h3>@vehicle.make @vehicle.model</h3>
-                <p>@vehicle.licenseplate</p>
-                <p>@vehicle.price</p>
+        <div class="vehicle-card" style="background-image: url('@(vehicle.imagelinkplaintext ?? "/[PLACEHOLDER IMAGE LOCATION]")')"">
+            <div class="vehicle-overlay">
+                <p><strong>Vehicle:</strong> @vehicle.make @vehicle.model</p>
+                <p><strong>Plate #:</strong> @vehicle.licenseplate</p>
+                <p><strong>Price/day:</strong> $@vehicle.price/day</p>
             </div>
 
-            <div>
-                <a asp-action="Edit" asp-route-id="@vehicle.vehicleid">Edit</a>
-                <a asp-action="Delete" asp-route-id="@vehicle.vehicleid">Delete</a>
+            <div class="vehicle-actions">
+                <a asp-action="Edit" asp-route-id="@vehicle.vehicleid" class="vehicle-action-btn">Edit</a>
+                <a asp-action="Delete" asp-route-id="@vehicle.vehicleid" class="vehicle-action-btn">Delete</a>
             </div>
         </div>
     }

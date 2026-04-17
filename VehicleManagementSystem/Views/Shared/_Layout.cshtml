@@ -1,27 +1,36 @@
 @using Microsoft.AspNetCore.Http
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<nav>
-    @{
-        string username = Context.Session.GetString(key: "Username");
-    }
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="~/css/global.css" />
+    </head>
 
-    @if(username != null)
-    {
-        <a asp-controller="Dashboard" asp-action="Index">Dashboard</a>
-        <a asp-controller="Customer" asp-action="Index">Customers</a>
-        <a asp-controller="Vehicle" asp-action="Index">Vehicles</a>
-        <a asp-controller="Reservation" asp-action="Index">Reservations</a>
-        <a asp-controller="Report" asp-action="Index">Reports</a>
-        <a asp-controller="Auth" asp-action="Logout">Logout</a>
-    }
-    else
-    {
-        <a asp-controller="Auth" asp-action="Login">Login</a>
-        <a asp-controller="Auth" asp-action="Register">Register</a>
-    }
-</nav>
+    <body>
+        <nav class="navbar">
+            @{
+                string username = Context.Session.GetString(key: "Username");
+            }
 
-<div style="margin-top:20px;">
-    @RenderBody()
-</div>
+            @if(username != null)
+            {
+                <a asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                <a asp-controller="Customer" asp-action="Index">Customers</a>
+                <a asp-controller="Vehicle" asp-action="Index">Vehicles</a>
+                <a asp-controller="Reservation" asp-action="Index">Reservations</a>
+                <a asp-controller="Report" asp-action="Index">Reports</a>
+                <a asp-controller="Auth" asp-action="Logout">Logout</a>
+            }
+            else
+            {
+                <a asp-controller="Auth" asp-action="Login">Login</a>
+                <a asp-controller="Auth" asp-action="Register">Register</a>
+            }
+        </nav>
+
+        <div class="container">
+            @RenderBody()
+        </div>
+    </body>
+</html>

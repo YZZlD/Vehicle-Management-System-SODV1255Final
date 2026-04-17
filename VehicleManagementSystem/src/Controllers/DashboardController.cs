@@ -31,9 +31,9 @@ namespace VehicleManagementSystem.Controllers
                 CustomerCount = customers.Count(),
                 ReservationCount = reservations.Count(),
 
-                Vehicles = vehicles.Take(3).ToList(),
-                Customers = customers.Take(3).ToList(),
-                Reservations = reservations.Take(3).ToList(),
+                Vehicles = vehicles.Take(5).ToList(),
+                Customers = customers.Take(10).ToList(),
+                Reservations = reservations.Take(10).ToList(),
 
                 UpcomingRentals = reservations
                     .Where(reservation => reservation.duedate > now && reservation.duedate <= now.AddDays(7))

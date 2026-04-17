@@ -1,16 +1,32 @@
 @model VehicleManagementSystem.src.Models.VEHICLEMODEL
 
-<h1>Delete Vehicle</h1>
+<div class="page-center">
+    <div class="form-card">
+        <h2>Delete Vehicle</h2>
 
-<p>Are you sure you want to delete this vehicle?</p>
 
-<div>
-    <strong>Vehicle:</strong> @Model.make @Model.model <br/>
-    <strong>LicensePlate:</strong> @Model.licenseplate <br/>
+
+        <div class="detail-group">
+            <div class="detail-row">
+                <strong><p class="danger">Are you sure you want to delete this vehicle?</p></strong> <br />
+            </div>
+            <div class="detail-row">
+                <strong>Vehicle:</strong> @Model.make @Model.model <br/>
+            </div>
+            <div class="detail-row">
+                <strong>License Plate:</strong> @Model.licenseplate <br/>
+            </div>
+            <div class="detail-row">
+                <strong>Price Rate:</strong> @Model.price <br />
+            </div>
+
+
+        </div>
+
+        <form asp-action="DeleteVehicle" method="post">
+            <input type="hidden" name="id" value="@Model.vehicleid" />
+            <button class="btn" type="submit" >Confirm Delete</button>
+            <a asp-action="Index">Cancel</a>
+        </form>
+    </div>
 </div>
-
-<form asp-action="DeleteVehicle" method="post">
-    <input type="hidden" name="id" value="@Model.vehicleid" />
-    <button type="submit" >Confirm Delete</button>
-    <a asp-action="Index">Cancel</a>
-</form>

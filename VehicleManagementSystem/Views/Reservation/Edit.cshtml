@@ -1,15 +1,19 @@
 @model VehicleManagementSystem.src.Models.RESERVATIONMODEL
 
-<h1>Edit Reservation</h1>
+<div class="page-center">
+    <div class="form-card">
+        <h1>Edit Reservation</h1>
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="reservationid" />
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="reservationid" />
 
-    <div >
-        <label for="returnedDate"></label>
-        <input name="returnedDate" type="date"/>
+            <div class="form-group">
+                <label for="returnedDate"></label>
+                <input name="returnedDate" type="date"/>
+            </div>
+
+            <button class="btn" type="submit">Save Changes</button>
+            <a asp-action="Index">Cancel</a>
+        </form>
     </div>
-
-    <button type="submit">Save Changes</button>
-    <a asp-action="Index">Cancel</a>
-</form>
+</div>

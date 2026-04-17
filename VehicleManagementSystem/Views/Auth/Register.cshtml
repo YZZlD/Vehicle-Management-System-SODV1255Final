@@ -1,19 +1,21 @@
-<h1>Register</h1>
 
-<div>
-    <div>
+
+<div class="page-center">
+    <div class="form-card">
+        <h2>Register</h2>
+
         <form asp-action="Register" method="post">
-            <div>
+            <div class="form-group">
                 <label for="username"></label>
                 <input for="username" name="username" placeholder="Username" />
             </div>
 
-            <div>
+            <div class="form-group">
                 <label for="password"></label>
                 <input for="password" name="password" placeholder="Password" />
             </div>
 
-            <button type="submit">Register</button>
+            <button class="btn" type="submit">Register</button>
             <a asp-action="Login">Cancel</a>
         </form>
     </div>

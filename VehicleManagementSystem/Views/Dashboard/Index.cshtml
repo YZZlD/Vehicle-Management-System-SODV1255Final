@@ -2,26 +2,29 @@
 
 <div>
     <div>
-        <div>
-            <h1>Vehicles</h1>
-            <h1>@Model.VehicleCount</h1>
-            <a asp-controller="Vehicle" asp-action="Create">+ ADD VEHICLE</a>
+        <div class="page-header">
+            <div class="header-title">
+                <h1>Total Vehicles:</h1>
+                <span class="header-count">@Model.VehicleCount</span>
+            </div>
+
+            <a asp-controller="Vehicle" asp-action="Create" class="link-button">+ ADD VEHICLE</a>
         </div>
         <div>
             <h1>Vehicle Snapshot</h1>
-            <div>
+            <div class="vehicle-grid">
                 @foreach(var vehicle in Model.Vehicles)
                 {
-                    <div style="background-image: url('@(vehicle.imagelinkplaintext ?? "/[PLACEHOLDER IMAGE LOCATION]")')">
-                        <div>
-                            <h3>@vehicle.make @vehicle.model</h3>
-                            <p>@vehicle.licenseplate</p>
-                            <p>@vehicle.price</p>
+                    <div class="vehicle-card" style="background-image: url('@(vehicle.imagelinkplaintext ?? "/[PLACEHOLDER IMAGE LOCATION]")')">
+                        <div class="vehicle-overlay">
+                            <p><strong>Vehicle:</strong> @vehicle.make @vehicle.model</p>
+                            <p><strong>Plate #:</strong> @vehicle.licenseplate</p>
+                            <p><strong>Price/day:</strong>$ @vehicle.price/day</p>
                         </div>
 
-                        <div>
-                            <a asp-controller="Vehicle" asp-action="Edit" asp-route-id="@vehicle.vehicleid">Edit Vehicle</a>
-                            <a asp-controller="Vehicle" asp-action="Delete" asp-route-id="@vehicle.vehicleid">Delete Vehicle</a>
+                        <div class="vehicle-actions">
+                            <a asp-action="Edit" asp-route-id="@vehicle.vehicleid" class="vehicle-action-btn">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@vehicle.vehicleid" class="vehicle-action-btn">Delete</a>
                         </div>
                     </div>
                 }
@@ -30,13 +33,17 @@
     </div>
 
     <div>
-        <div>
-            <h1>Customers</h1>
-            <h1>@Model.CustomerCount</h1>
-            <a asp-controller="Customer" asp-action="Create">+ ADD CUSTOMER</a>
+        <div class="page-header">
+            <div class="header-title">
+                <h1>Total Customers:</h1>
+                <span class="header-count">@Model.CustomerCount</span>
+            </div>
+
+            <a asp-controller="Customer" asp-action="Create" class="link-button">+ ADD CUSTOMER</a>
         </div>
-        <div>
-            <table>
+
+        <div class="table-container">
+            <table class="table">
                 <thead>
                     <tr>
                         <tr>
@@ -69,77 +76,96 @@
     </div>
 
     <div>
-        <div>
-            <h1>Reservations</h1>
-            <h1>@Model.ReservationCount</h1>
-            <a asp-controller="Reservation" asp-action="SelectDate">+ ADD RESERVATION</a>
-        </div>
-
-        <div>
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Customer</th>
-                            <th>Vehicle</th>
-                            <th>Reserved Date</th>
-                            <th>Due Date</th>
-                            <td>Returned Date</td>
-                            <th>Price Total</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach(var reservation in Model.Reservations)
-                        {
-                            <tr>
-                                <td>@reservation.user?.fname @reservation.user?.lname</td>
-                                <td>@reservation.vehicle?.make @reservation.vehicle?.model </td>
-                                <td>@reservation.reservedate.ToString("MMM dd, yyyy")</td>
-                                <td>@reservation.duedate.ToString("MMM dd, yyyy")</td>
-                                <td>@(reservation.returneddate.HasValue ? reservation.returneddate.Value.ToString("MMM dd, yyyy") : "Not Returned")</td>
-                                <td>@reservation.price.ToString("C")</td>
-                                <td>
-                                    <a asp-controller="Reservation" asp-action="Edit" asp-route-id="@reservation.reservationid">Edit Reservation</a>
-                                    <a asp-controller="Reservation" asp-action="Delete" asp-route-id="@reservation.reservationid">Delete Reservation</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+        <div class="page-header">
+            <div class="header-title">
+                <h1>Total Reservations:</h1>
+                <span class="header-count">@Model.ReservationCount</span>
             </div>
+
+            <a asp-controller="Reservation" asp-action="SelectDate" class="link-button">+ ADD RESERVATION</a>
+        </div>
+
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Vehicle</th>
+                        <th>Reserved Date</th>
+                        <th>Due Date</th>
+                        <th>Returned Date</th>
+                        <th>Price Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach(var reservation in Model.Reservations)
+                    {
+                        <tr>
+                            <td>@reservation.user?.fname @reservation.user?.lname</td>
+                            <td>@reservation.vehicle?.make @reservation.vehicle?.model </td>
+                            <td>@reservation.reservedate.ToString("MMM dd, yyyy")</td>
+                            <td>@reservation.duedate.ToString("MMM dd, yyyy")</td>
+                            <td>@(reservation.returneddate.HasValue ? reservation.returneddate.Value.ToString("MMM dd, yyyy") : "Not Returned")</td>
+                            <td>@reservation.price.ToString("C")</td>
+                            <td>
+                                <a asp-controller="Reservation" asp-action="Edit" asp-route-id="@reservation.reservationid">Edit Reservation</a>
+                                <a asp-controller="Reservation" asp-action="Delete" asp-route-id="@reservation.reservationid">Delete Reservation</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 
     <div>
-        <div>
-            <h1>Vehicle Availability Distribution</h1>
-        </div>
-
-        <div>
+        <div class="table-container">
             <h1>Upcoming Rentals Due</h1>
-            @foreach(var reservation in @Model.UpcomingRentals)
-            {
-                <div>
-                    <p>@reservation.user?.fname @reservation.user?.lname</p>
-                    <p>@reservation.vehicle?.make @reservation.vehicle?.model</p>
-                    <p>@reservation.duedate.ToString("MMM dd, yyyy")</p>
-                </div>
-            }
+
+            <table class="table table-compact">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Vehicle</th>
+                        <th>Due Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach(var reservation in @Model.UpcomingRentals)
+                    {
+                        <tr>
+                            <td>@reservation.user?.fname @reservation.user?.lname</td>
+                            <td>@reservation.vehicle?.make @reservation.vehicle?.model</td>
+                            <td>@reservation.duedate.ToString("MMM dd, yyyy")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
         </div>
     </div>
 
 
-    <div>
-        <h1>OVERDUE ALERTS</h1>
+    <div class="alet-section">
+        <h1>OVERDUE ALERTS</h1
+        >
         @foreach(var reservation in @Model.OverdueRentals)
         {
-            <div>
-                <p>@reservation.user?.fname @reservation.user?.lname</p>
-                <p>@reservation.vehicle?.make @reservation.vehicle?.model</p>
-                <p>@reservation.duedate.ToString("MMM dd, yyyy")</p>
-                @* THIS WILL BE STYLED DANGER STYLE *@
+            <div class="alert-item">
+                <div>
+                    <strong>@reservation.user?.fname @reservation.user?.lname</strong>
+                </div>
+
+                <div>
+                    <strong>@reservation.vehicle?.make @reservation.vehicle?.model</strong>
+                </div>
+
+                <div>
+                    <strong>@reservation.duedate.ToString("MMM dd, yyyy")</strong>
+                </div>
             </div>
         }
     </div>

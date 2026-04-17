@@ -1,40 +1,40 @@
 @model List<VehicleManagementSystem.src.Models.RESERVATIONMODEL>
 
-<div>
+<div class="page-header">
     <h2>Reservations</h2>
-    <a asp-action="SelectDate">+ ADD NEW RESERVATION</a>
+    <a asp-action="SelectDate" class="link-button">+ ADD NEW RESERVATION</a>
 </div>
 
-<div>
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Customer</th>
-                    <th>Vehicle</th>
-                    <th>Reserved Date</th>
-                    <th>Due Date</th>
-                    <th>Price Total</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Vehicle</th>
+                <th>Reserved Date</th>
+                <th>Due Date</th>
+                <th>Returned Date</th>
+                <th>Price Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
 
-            <tbody>
-                @foreach(var reservation in Model)
-                {
-                    <tr>
-                        <td>@reservation.user?.fname @reservation.user?.lname</td>
-                        <td>@reservation.vehicle?.make @reservation.vehicle?.model </td>
-                        <td>@reservation.reservedate.ToString("MMM dd, yyyy")</td>
-                        <td>@reservation.duedate.ToString("MMM dd, yyyy")</td>
-                        <td>@reservation.price.ToString("C")</td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@reservation.reservationid">Edit Customer</a>
-                            <a asp-action="Delete" asp-route-id="@reservation.reservationid">Delete Customer</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+        <tbody>
+            @foreach(var reservation in Model)
+            {
+                <tr>
+                    <td>@reservation.user?.fname @reservation.user?.lname</td>
+                    <td>@reservation.vehicle?.make @reservation.vehicle?.model </td>
+                    <td>@reservation.reservedate.ToString("MMM dd, yyyy")</td>
+                    <td>@reservation.duedate.ToString("MMM dd, yyyy")</td>
+                    <td>@(reservation.returneddate.HasValue ? reservation.returneddate.Value.ToString("MMM dd, yyyy") : "Not Returned")</td>
+                    <td>@reservation.price.ToString("C")</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@reservation.reservationid">Edit Resevation</a>
+                        <a asp-action="Delete" asp-route-id="@reservation.reservationid">Delete Reservation</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
