@@ -1,14 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
+using VehicleManagementSystem.src.Repositories;
+using VehicleManagementSystem.ViewModels;
 
 namespace VehicleManagementSystem.Controllers
 {
     public class DashboardController : BaseController
     {
-        private readonly CustomerRepository _customerRepository;
-        private readonly VehicleRepository _vehicleRepository;
-        private readonly ReservationRepository _reservationRepository;
+        private readonly USERREPO _customerRepository;
+        private readonly VEHICLEREPO _vehicleRepository;
+        private readonly RESERVEREPO _reservationRepository;
 
-        public DashboardController(CustomerRepository customerRepository, VehicleRepository vehicleRepository, ReservationRepository reservationRepository)
+        public DashboardController(USERREPO customerRepository, VEHICLEREPO vehicleRepository, RESERVEREPO reservationRepository)
         {
             _customerRepository = customerRepository;
             _vehicleRepository = vehicleRepository;
@@ -17,9 +19,9 @@ namespace VehicleManagementSystem.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var vehicles = await _vehicleRepository.GetAllVehicles();
-            var customers = await _customerRepository.GetAllCustomers();
-            var reservations = await _reservationRepository.GetAllReservations();
+            var vehicles = await _vehicleRepository.Index();
+            var customers = await _customerRepository.GetAllUsers();
+            var reservations = await _reservationRepository.index();
 
             var now = DateTime.UtcNow;
 
@@ -30,13 +32,13 @@ namespace VehicleManagementSystem.Controllers
                 Reservations = reservations.Take(3).ToList(),
 
                 UpcomingRentals = reservations
-                    .Where(reservation => reservation.DueDate > now && reservation.DueDate <= now.AddDays(7))
-                    .OrderBy(reservation => reservation.DueDate)
+                    .Where(reservation => reservation.duedate > now && reservation.duedate <= now.AddDays(7))
+                    .OrderBy(reservation => reservation.duedate)
                     .ToList(),
 
                 OverdueRentals = reservations
-                    .Where(reservation => reservation.DueDate < now)
-                    .OrderBy(reservation => reservation.DueDate)
+                    .Where(reservation => reservation.duedate < now)
+                    .OrderBy(reservation => reservation.duedate)
                     .ToList()
             };
 
