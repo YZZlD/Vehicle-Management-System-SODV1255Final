@@ -4,23 +4,27 @@
 
 <form asp-action="Create" method="post">
     <div>
-        <label asp-for="Model"></label>
+        <label asp-for="Model">Model: </label>
         <input asp-for="Model" />
     </div>
 
     <div>
-        <label asp-for="Make"></label>
+        <label asp-for="Make">Make: </label>
         <input asp-for="Make" />
     </div>
 
     <div>
-        <label asp-for="LicensePlate"></label>
+        <label asp-for="LicensePlate">License Plate: </label>
         <input asp-for="LicensePlate" />
     </div>
 
     <div>
-        <label asp-for="PriceRate"></label>
+        <label asp-for="PriceRate">Price Rate ($/day): </label>
         <input asp-for="LicensePlate" />
+    </div>
+
+    <div>
+        <label asp-for="ImageUrl">Image URL: </label>
     </div>
 
     <button type="submit">Create Vehicle</button>

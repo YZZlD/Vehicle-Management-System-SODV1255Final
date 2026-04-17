@@ -1,17 +1,15 @@
-using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 
 namespace VehicleManagementSystem.Controllers
 {
     public class ReportController : BaseController
     {
-        // private readonly ReservationRepository _reservationRepository;
+        private readonly ReservationRepository _reservationRepository;
 
-        // public ReportController(ReservationRepository reservationRepository)
-        // {
-        //     _reservationRepository = reservationRepository;
-        // }
+        public ReportController(ReservationRepository reservationRepository)
+        {
+            _reservationRepository = reservationRepository;
+        }
 
         //Filtering is handled through regetting the route with new parameter information internally from the generate button through the view.
         //With empty parameters all reservations will be included.

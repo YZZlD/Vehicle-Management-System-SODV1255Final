@@ -5,16 +5,16 @@ namespace VehicleManagementSystem.Controllers
 {
     public class ReservationController : BaseController
     {
-        // private readonly ReservationRepository _reservationRepository;
-        // private readonly CustomerRepository _customerRepository;
-        // private readonly VehicleRepository _vehicleRepository;
+        private readonly ReservationRepository _reservationRepository;
+        private readonly CustomerRepository _customerRepository;
+        private readonly VehicleRepository _vehicleRepository;
 
-        // public ReservationController(ReservationRepository reservationRepository, CustomerRepository customerRepository, VehicleRepository vehicleRepository)
-        // {
-        //     _reservationRepository = reservationRepository;
-        //     _customerRepository = customerRepository;
-        //     _vehicleRepository = vehicleRepository;
-        // }
+        public ReservationController(ReservationRepository reservationRepository, CustomerRepository customerRepository, VehicleRepository vehicleRepository)
+        {
+            _reservationRepository = reservationRepository;
+            _customerRepository = customerRepository;
+            _vehicleRepository = vehicleRepository;
+        }
 
         public async Task<IActionResult> Index()
         {

@@ -4,12 +4,12 @@ namespace VehicleManagementSystem.Controllers
 {
     public class AuthController : Controller
     {
-        //private readonly AuthRepository _authRepository;
+        private readonly AuthRepository _authRepository;
 
-        // public AuthController(AuthRepository authRepository)
-        // {
-        //     _authRepository = authRepository;
-        // }
+        public AuthController(AuthRepository authRepository)
+        {
+            _authRepository = authRepository;
+        }
 
         public IActionResult Login() => View();
 

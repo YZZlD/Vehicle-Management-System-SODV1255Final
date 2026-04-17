@@ -21,13 +21,15 @@ namespace VehicleManagementSystem.Controllers
         public async Task<IActionResult> Create() => View();
 
         [HttpPost]
-        public async Task<IActionResult> Create(VehicleController DTO)
+        public async Task<IActionResult> Create(VehicleController vehicleDTO)
         {
             var vehicle = new Vehicle
             {
-                /*
-                    VEHICLE OBJECT IS CREATED FROM VEHICLEDTO FIELDS FROM FORM SUBMISSION
-                */
+                Make = vehicleDTO.Make,
+                Model = vehicleDTO.Model,
+                LicensePlate = vehicleDTO.LicensePlate,
+                PriceRate = vehicleDTO.PriceRate,
+                ImageURL = vehicleDTO.ImageURL
             };
 
             await _vehicleRepository.AddVehicle(vehicle);
@@ -46,9 +48,11 @@ namespace VehicleManagementSystem.Controllers
         {
             var vehicle = new Vehicle
             {
-                /*
-                    VEHICLE OBJECT IS CREATED FROM VEHICLEDTO FIELDS GRABBED FROM FORM SUBMISSION
-                */
+                Make = vehicleDTO.Make,
+                Model = vehicleDTO.Model,
+                LicensePlate = vehicleDTO.LicensePlate,
+                PriceRate = vehicleDTO.PriceRate,
+                ImageURL = vehicleDTO.ImageURL
             };
 
             await _vehicleRepository.UpdateVehicle(id, vehicle);
