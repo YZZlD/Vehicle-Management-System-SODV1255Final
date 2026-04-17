@@ -5,7 +5,7 @@
 <form asp-action="Create" method="post">
     <div>
         <label asp-for="model">Model: </label>
-        <input asp-for="model" />
+        <input asp-name="model" />
     </div>
 
     <div>
@@ -19,12 +19,13 @@
     </div>
 
     <div>
-        <label asp-for="pricerate">Price Rate ($/day): </label>
-        <input asp-for="pricerate" />
+        <label asp-for="price">Price Rate ($/day): </label>
+        <input asp-for="price" />
     </div>
 
     <div>
-        <label asp-for="plaintextimageurl">Image URL: </label>
+        <label asp-for="imagelinkplaintext">Image URL: </label>
+        <input asp-for="imagelinkplaintext" />
     </div>
 
     <button type="submit">Create Vehicle</button>

@@ -31,7 +31,7 @@ namespace VehicleManagementSystem.Controllers
                 model = vehicleDTO.Model,
                 licenseplate = vehicleDTO.LicensePlate,
                 price = vehicleDTO.PriceRate,
-                imageurl = vehicleDTO.ImageURL
+                imagelinkplaintext = vehicleDTO.ImageURL
             };
 
             _vehicleRepository.AddVehicle(vehicle);
@@ -54,7 +54,7 @@ namespace VehicleManagementSystem.Controllers
             vehicle.model = vehicleDTO.Model;
             vehicle.licenseplate = vehicleDTO.LicensePlate;
             vehicle.price = vehicleDTO.PriceRate;
-            vehicle.imageurl = vehicleDTO.ImageURL;
+            vehicle.imagelinkplaintext = vehicleDTO.ImageURL;
 
             _vehicleRepository.EditVehicle(vehicle);
             return RedirectToAction("Index");
@@ -75,4 +75,5 @@ namespace VehicleManagementSystem.Controllers
 
             return RedirectToAction("Index");
         }
+    }
 }

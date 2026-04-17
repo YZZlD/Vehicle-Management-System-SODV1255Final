@@ -8,11 +8,11 @@
 <div>
     @foreach(var vehicle in Model)
     {
-        <div style="background-image: url('@(vehicle.imageurlplaintext ?? "/[PLACEHOLDER IMAGE LOCATION]")')">
+        <div style="background-image: url('@(vehicle.imagelinkplaintext ?? "/[PLACEHOLDER IMAGE LOCATION]")')">
             <div>
                 <h3>@vehicle.make @vehicle.model</h3>
                 <p>@vehicle.licenseplate</p>
-                <p>@vehicle.pricerate</p>
+                <p>@vehicle.price</p>
             </div>
 
             <div>

@@ -68,7 +68,7 @@ namespace VehicleManagementSystem.Controllers
                 vehicleid = vehicleId,
                 reservedate = reservedDate,
                 duedate = dueDate,
-                price = CalculatePrice(vehicle, reservedDate, dueDate, null)
+                price = PricingHelper.CalculatePrice(vehicle, reservedDate, dueDate, null)
             };
 
             _reservationRepository.Addreserve(reservation);
@@ -94,7 +94,7 @@ namespace VehicleManagementSystem.Controllers
 
             reservation.returneddate = returnedDate;
 
-            reservation.price = CalculatePrice(vehicle, reservation.reservedate, reservation.duedate, reservation.returneddate);
+            reservation.price = PricingHelper.CalculatePrice(vehicle, reservation.reservedate, reservation.duedate, reservation.returneddate);
 
             _reservationRepository.Edit(reservation);
 

@@ -2,7 +2,6 @@ using VehicleManagementSystem.src.Models;
 
 namespace VehicleManagementSystem.Helpers
 {
-
     public static class PricingHelper
     {
         public static double CalculatePrice(VEHICLEMODEL vehicle, DateTime reservedDate, DateTime dueDate, DateTime? returnedDate)
