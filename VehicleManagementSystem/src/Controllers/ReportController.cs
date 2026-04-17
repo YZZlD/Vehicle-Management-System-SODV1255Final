@@ -19,46 +19,44 @@ namespace VehicleManagementSystem.Controllers
         {
             // This did in fact break include must be included in the repository calls to grab the vehicle and customer objects implicitly from the object
 
-            var reservations = await _reservationRepository.index().Include(reservation => reservation.Vehicle).Include(reservation => reservation.Customer);
+            var reservations = await _reservationRepository.index();
 
-            var makes = await _reservationRepository
-                                .index()
-                                .Include(reservation => reservation.Vehicle)
-                                .Select(reservation => reservation.Vehicle.Make)
-                                .Distinct()
-                                .ToList();
+            var makes = reservations
+                            .Select(reservation => reservation.vehicle.make)
+                            .Distinct()
+                            .ToList();
 
             DateTime from = string.IsNullOrWhiteSpace(dateFrom) ? DateTime.MinValue : DateTime.Parse(dateFrom);
             DateTime to = string.IsNullOrWhiteSpace(dateTo) ? DateTime.MaxValue : DateTime.Parse(dateTo);
 
-            var filteredReservations = reservations.Where(reservation => reservation.ReservedDate >= from && reservation.ReservedDate <= to);
+            var filteredReservations = reservations.Where(reservation => reservation.reservedate >= from && reservation.reservedate <= to);
 
             if(!string.IsNullOrWhiteSpace(vehicleMake))
             {
-                filteredReservations = filteredReservations.Where(reservation => reservation.Vehicle.Make == vehicleMake);
+                filteredReservations = filteredReservations.Where(reservation => reservation.vehicle.make == vehicleMake);
             }
 
             if(minAge.HasValue)
             {
-                filteredReservations = filteredReservations.Where(reservation => reservation.Customer.Age >= minAge.Value);
+                filteredReservations = filteredReservations.Where(reservation => reservation.user.age >= minAge.Value);
             }
 
             if(maxAge.HasValue)
             {
-                filteredReservations = filteredReservations.Where(reservation => reservation.Customer.Age <= maxAge.Value);
+                filteredReservations = filteredReservations.Where(reservation => reservation.user.age <= maxAge.Value);
             }
 
-            var totalRevenue = filteredReservations.Sum(reservation => reservation.TotalPrice);
+            var totalRevenue = filteredReservations.Sum(reservation => reservation.price);
             var totalReservations = filteredReservations.Count();
-            var activeRentals = filteredReservations.Where(reservation => DateTime.Today >= reservation.ReservedDate && DateTime.Today <= reservation.DueDate).ToList().Count();
-            var mostPopularVehicle = filteredReservations.GroupBy(reservation => reservation.Vehicle.Model)
-                                        .OrderByDescending(group => group.Count)
+            var activeRentals = filteredReservations.Where(reservation => DateTime.Today >= reservation.reservedate && DateTime.Today <= reservation.duedate).ToList().Count();
+            var mostPopularVehicle = filteredReservations.GroupBy(reservation => reservation.vehicle.model)
+                                        .OrderByDescending(group => group.Count())
                                         .Select(group => group.Key)
                                         .FirstOrDefault();
 
             var reportViewModel = new ReportViewModel
             {
-                Reservations = filteredReservations,
+                Reservations = filteredReservations.ToList(),
                 TotalRevenue = totalRevenue,
                 TotalReservations = totalReservations,
                 ActiveRentals = activeRentals,
