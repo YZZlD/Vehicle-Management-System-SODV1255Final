@@ -1,0 +1,39 @@
+@* @model List<VehicleManagementSystem.Models.Customer> *@
+
+<div>
+    <h2>Customers</h2>
+    <a asp-action="Create">+ ADD NEW CUSTOMER</a>
+</div>
+
+<div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach(Customer customer in Model)
+                {
+                    <tr>
+                        <td>@customer.FirstName @customer.LastName</td>
+                        <td>@customer.Email</td>
+                        <td>@customer.Phone</td>
+                        <td>@customer.Age</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@customer.CustomerId">Edit Customer</a>
+                            <a asp-action="Delete" asp-route-id="@customer.CustomerId">Delete Customer</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

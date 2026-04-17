@@ -1,0 +1,25 @@
+@* @model VehicleManagementSystem.Models.Reservation *@
+
+<h1>Create New Reservation</h1>
+
+<form asp-action="Create" method="post">
+    <input type="hidden" name="reservedDate" value="@ViewBag.ReservedDate" />
+    <input type="hidden" name="dueDate" value="@ViewBag.DueDate" />
+
+    <div>
+        <label for="customerId">Customer</label>
+        <select id="customerId" name="customerId" asp-items="@ViewBag.Customers">
+            <option value="">-- Select Customer --</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="vehicleId">Vehicle</label>
+        <select id="vehicleId" name="vehicleId" asp-items="@ViewBag.Vehicles">
+            <option value="">-- Select Vehicle --</option>
+        </select>
+    </div>
+
+    <button type="submit">Create Reservation</button>
+    <a asp-action="Index">Cancel</a>
+</form>

@@ -1,0 +1,28 @@
+@* @model VehicleManagementSystem.Models.Customer *@
+
+<h1>Create New Customer</h1>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" />
+    </div>
+
+    <div>
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" />
+    </div>
+
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+    </div>
+
+    <div>
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" />
+    </div>
+
+    <button type="submit">Create Customer</button>
+    <a asp-action="Index">Cancel</a>
+</form>

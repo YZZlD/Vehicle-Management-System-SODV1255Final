@@ -1,0 +1,77 @@
+using Microsoft.AspNetCore.Mvc;
+
+namespace VehicleManagementSystem.Controllers
+{
+    public class VehicleController : BaseController
+    {
+        private readonly VehicleRepository _vehicleRepository;
+
+        public VehicleController(VehicleRepository vehicleRepository)
+        {
+            _vehicleRepository = vehicleRepository;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var vehicles = await _vehicleRepository.GetAllVehicles();
+
+            return View(vehicles);
+        }
+
+        public async Task<IActionResult> Create() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> Create(VehicleController vehicleDTO)
+        {
+            var vehicle = new Vehicle
+            {
+                Make = vehicleDTO.Make,
+                Model = vehicleDTO.Model,
+                LicensePlate = vehicleDTO.LicensePlate,
+                PriceRate = vehicleDTO.PriceRate,
+                ImageURL = vehicleDTO.ImageURL
+            };
+
+            await _vehicleRepository.AddVehicle(vehicle);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var vehicle = await _vehicleRepository.GetVehicleById(id);
+            if(!vehicle) return NotFound();
+            return View(vehicle);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, VehicleDTO vehicle)
+        {
+            var vehicle = new Vehicle
+            {
+                Make = vehicleDTO.Make,
+                Model = vehicleDTO.Model,
+                LicensePlate = vehicleDTO.LicensePlate,
+                PriceRate = vehicleDTO.PriceRate,
+                ImageURL = vehicleDTO.ImageURL
+            };
+
+            await _vehicleRepository.UpdateVehicle(id, vehicle);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var vehicle = await _vehicleRepository.GetVehicleById(id);
+            if(vehicle == null) return NotFound();
+
+            return View(vehicle);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteVehicle(int id)
+        {
+            await _vehicleRepository.DeleteVehicle(id);
+
+            return RedirectToAction("Index");
+        }
+}

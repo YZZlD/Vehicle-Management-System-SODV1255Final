@@ -1,0 +1,35 @@
+@* @model List<VehicleManagementSystem.Models.Reservation> *@
+
+<div>
+    <h2>Reservations</h2>
+    <a asp-action="SelectDate">+ ADD NEW RESERVATION</a>
+</div>
+
+<div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Vehicle</th>
+                    <th>Reserved Date</th>
+                    <th>Due Date</th>
+                    <th>Price Total</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach(var reservation in Model)
+                {
+                    <tr>
+                        <td>@reservation.Customer.FirstName @reservation.Customer.LastName</td>
+                        <td>@reservation.Vehicle.Make @reservation.Vehicle.Model </td>
+                        <td>@reservation.ReservedDate.ToString("MMM dd, yyyy")</td>
+                        <td>@reservation.DueDate.ToString("MMM dd, yyyy")</td>
+                        <td>@reservation.PriceTotal.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

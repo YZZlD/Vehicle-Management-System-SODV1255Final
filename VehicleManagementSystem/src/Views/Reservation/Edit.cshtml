@@ -1,0 +1,15 @@
+@* @model VehicleManagementSystem.Model.Reservation *@
+
+<h1>Edit Reservation</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ReservationId" />
+
+    <div >
+        <label for="returnedDate"></label>
+        <input name="returnedDate" type="date"/>
+    </div>
+
+    <button type="submit">Save Changes</button>
+    <a asp-action="Index">Cancel</a>
+</form>

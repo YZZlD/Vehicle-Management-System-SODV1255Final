@@ -1,0 +1,24 @@
+@* @model List<VehicleManagementSystem.Models.Vehicle> *@
+
+<div>
+    <h2>Vehicles</h2>
+    <a asp-action="Create">+ ADD NEW VEHICLE</a>
+</div>
+
+<div>
+    @foreach(Vehicle vehicle in Model)
+    {
+        <div style="background-image: url('@(vehicle.ImageUrl ?? "/[PLACEHOLDER IMAGE LOCATION]")')">
+            <div>
+                <h3>@vehicle.Make @vehicle.Model</h3>
+                <p>@vehicle.LicensePlate</p>
+                <p>@vehicle.PriceRate</p>
+            </div>
+
+            <div>
+                <a asp-action="Edit" asp-route-id="@vehicle.VehicleId">Edit</a>
+                <a asp-action="Delete" asp-route-id="@vehicle.VehicleId">Delete</a>
+            </div>
+        </div>
+    }
+</div>
