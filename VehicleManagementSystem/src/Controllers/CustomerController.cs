@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VehicleManagementSystem.src.Models;
 using VehicleManagementSystem.src.Repositories;
@@ -26,6 +25,8 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CustomerDTO customerDTO)
         {
+            //We use modelstate here to check if the DTOs object fields are valid from the form submission, if not we prefill with entered information in
+            //a re-returned view
             if(!ModelState.IsValid)
             {
                 return View(customerDTO);
@@ -65,6 +66,7 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, CustomerDTO customerDTO)
         {
+            //Same validation logic for all edit/create routes reference initial customer Create()
             if(!ModelState.IsValid)
             {
                 return View(customerDTO);

@@ -18,6 +18,7 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string username, string password)
         {
+            //Basic validation for username and password form fields
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
                 ViewBag.Error = "Invalid input";
@@ -26,12 +27,14 @@ namespace VehicleManagementSystem.Controllers
 
             var user = await _authRepository.checkcreds(username, password);
 
+            //Rereturn the view if the credentials don't register in the repository with error information
             if (user == null)
             {
                 ViewBag.Error = "Username or Password incorrect";
                 return View();
             }
 
+            //Set values in session context for user validation
             HttpContext.Session.SetInt32("UserID", user.staffid);
             HttpContext.Session.SetString("Username", user.username);
             return RedirectToAction("Index", "Dashboard");
@@ -49,6 +52,7 @@ namespace VehicleManagementSystem.Controllers
             return RedirectToAction("Login");
         }
 
+        //We simply clear the session to logout a user
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();

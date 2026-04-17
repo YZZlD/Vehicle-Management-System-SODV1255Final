@@ -77,6 +77,8 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(int? customerId, int? vehicleId, DateTime reservedDate, DateTime dueDate)
         {
+            //Here we need to check if either field is null as this will crash the db
+            //If it is null we must regrab the logic for all of the necessary filtering to only show available vehicles
             if(customerId == null || vehicleId == null)
             {
                 ModelState.AddModelError("", "Please select a customer and vehicle.");

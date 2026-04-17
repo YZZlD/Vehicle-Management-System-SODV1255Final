@@ -17,18 +17,19 @@ namespace VehicleManagementSystem.Controllers
         //With empty parameters all reservations will be included.
         public async Task<IActionResult> Index(string dateFrom, string dateTo, string vehicleMake, int? minAge, int? maxAge)
         {
-            // This did in fact break include must be included in the repository calls to grab the vehicle and customer objects implicitly from the object
-
             var reservations = await _reservationRepository.index();
 
+            //We need to grab a list of makes to show in the filtering form
             var makes = reservations
                             .Select(reservation => reservation.vehicle.make)
                             .Distinct()
                             .ToList();
 
+            //Filtering here empty input using DATETIME defaults
             DateTime from = string.IsNullOrWhiteSpace(dateFrom) ? DateTime.MinValue : DateTime.Parse(dateFrom);
             DateTime to = string.IsNullOrWhiteSpace(dateTo) ? DateTime.MaxValue : DateTime.Parse(dateTo);
 
+            //These are all validation for empty inputs and if empty we simply do not apply the filtering logic
             var filteredReservations = reservations.Where(reservation => reservation.reservedate >= from && reservation.reservedate <= to);
 
             if(!string.IsNullOrWhiteSpace(vehicleMake))
@@ -46,6 +47,7 @@ namespace VehicleManagementSystem.Controllers
                 filteredReservations = filteredReservations.Where(reservation => reservation.user.age <= maxAge.Value);
             }
 
+            //Filter information from the filteredReservations object to use in the report view model
             var totalRevenue = filteredReservations.Sum(reservation => reservation.price);
             var totalReservations = filteredReservations.Count();
             var activeRentals = filteredReservations.Where(reservation => DateTime.Today >= reservation.reservedate && DateTime.Today <= reservation.duedate).ToList().Count();

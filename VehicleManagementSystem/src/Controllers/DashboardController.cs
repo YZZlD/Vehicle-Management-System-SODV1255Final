@@ -27,19 +27,23 @@ namespace VehicleManagementSystem.Controllers
 
             var model = new DashboardViewModel
             {
+                //Grab counts to display and tie them to the viewModel property
                 VehicleCount = vehicles.Count(),
                 CustomerCount = customers.Count(),
                 ReservationCount = reservations.Count(),
 
+                //We grab 5 vehicles (due to larger cards) and 10 of each customer and reservation to show on dashboard
                 Vehicles = vehicles.Take(5).ToList(),
                 Customers = customers.Take(10).ToList(),
                 Reservations = reservations.Take(10).ToList(),
 
+                //Filter logic for finding rentals due in the next 7 days
                 UpcomingRentals = reservations
                     .Where(reservation => reservation.duedate > now && reservation.duedate <= now.AddDays(7))
                     .OrderBy(reservation => reservation.duedate)
                     .ToList(),
 
+                //All rentals where the current date is past the dueDate and they do not have a return date
                 OverdueRentals = reservations
                     .Where(reservation => reservation.duedate < now)
                     .Where(reservation => reservation.returneddate == null)
