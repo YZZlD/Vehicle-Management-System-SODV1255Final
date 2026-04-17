@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="src\Repositories\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
 
 </Project>

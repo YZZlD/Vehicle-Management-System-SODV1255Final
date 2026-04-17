@@ -5,8 +5,10 @@ namespace VehicleManagementSystem.src.Models
     public class VEHICLEMODEL
     {
         [Required]
-        public int vehicleid;
-        public string licenseplate;
-        public string model;
+        [Key]
+        public int vehicleid { get; set; }
+        public string licenseplate { get; set; }
+        public string model { get; set; }
+        public string make { get; set; }
     }
 }

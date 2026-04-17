@@ -11,3 +11,4 @@ namespace VehicleManagementSystem.src.Data
         public DbSet<VEHICLEMODEL> Vehicles { get; set; }
     }
 }
+//remove later

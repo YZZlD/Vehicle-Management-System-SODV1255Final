@@ -5,6 +5,7 @@ namespace VehicleManagementSystem.src.Data
 {
     public class USERMODELDB:DbContext
     {
+        //remove later
         public USERMODELDB(DbContextOptions<USERMODELDB> options) : base(options)
         {
         }

@@ -6,10 +6,11 @@ namespace VehicleManagementSystem.src.Models
     public class STAFFMODEL
     {
         [Required]
-        public int staffid;
+        [Key]
+        public int staffid { get; set; }
         [Required]
-        public string password;
+        public string password { get; set; }
         [Required]
-        public string username; 
+        public string username { get; set; }
     }
 }

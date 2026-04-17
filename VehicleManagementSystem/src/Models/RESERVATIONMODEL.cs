@@ -1,19 +1,24 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VehicleManagementSystem.src.Models
 {
     public class RESERVATIONMODEL
     {
         [Required]
-        public int reservationid;
-        public int userid;//usermade reservation
-        public int vehicleid;
-        public double price;
-        public string locationrented;
-        public double appliedtaxes;
-        public string[] nameofappliedtaxes;//maybe put down and keep track what taxes applied to a reservation? remove later if not
-        public DateTime reservedate;
-        public DateTime duedate;
-        public DateTime returneddate;
+        [Key]
+        public int reservationid { get;set;}
+        [Required]
+        public int userid { get; set; }
+        [ForeignKey("userid")]
+        public USERMODEL user { get; set; }
+        [Required]
+        public int vehicleid { get; set; }
+        [ForeignKey("vehicleid")]
+        public VEHICLEMODEL vehicle { get; set; }
+        public double price { get; set; }
+        public DateTime reservedate { get; set; }
+        public DateTime duedate { get; set; }
+        public DateTime? returneddate { get; set; }
     }
 }

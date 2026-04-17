@@ -7,6 +7,7 @@ namespace VehicleManagementSystem.src.Data
     {
         public RESERVATIONDB(DbContextOptions<RESERVATIONDB> options) : base(options)
         {
+            //remove later
         }
         public DbSet<RESERVATIONMODEL> Reservations { get; set; }
     }
