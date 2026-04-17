@@ -48,15 +48,6 @@ namespace VehicleManagementSystem.Controllers
                 filteredReservations = filteredReservations.Where(reservation => reservation.Customer.Age <= maxAge.Value);
             }
 
-            //Basic first filtering implementation (UNTESTED)
-            //Logic error here as it will return nothing if either vehicle or customer are empty.
-            // var filteredReservations = reservations
-            //                             .Where(r => r.DateTime >= from && r.DateTime <= to)
-            //                             .Where(r => vehicleList.Contains(r.Vehicle))
-            //                             .Where(r => customerList.Contains(r.Customer))
-            //                             .ToList();
-
-            //Basic logic grabs for different necessary information for the view (UNTESTED)
             var totalRevenue = filteredReservations.Sum(reservation => reservation.TotalPrice);
             var totalReservations = filteredReservations.Count();
             var activeRentals = filteredReservations.Where(reservation => DateTime.Today >= reservation.ReservedDate && DateTime.Today <= reservation.DueDate).ToList().Count();

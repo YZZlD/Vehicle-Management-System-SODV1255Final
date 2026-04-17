@@ -7,30 +7,31 @@ namespace VehicleManagementSystem.Controllers
 {
     public class CustomerController : BaseController
     {
-        //private readonly CustomerRepository _customerRepository;
+        private readonly CustomerRepository _customerRepository;
 
-        // public CustomerController(CustomerRepository customerRepository)
-        // {
-        //     _customerRepository = customerRepository;
-        // }
+        public CustomerController(CustomerRepository customerRepository)
+        {
+            _customerRepository = customerRepository;
+        }
 
         public async Task<IActionResult> Index()
         {
-            // var customers = await _customerRepository.GetAllCustomers();
+            var customers = await _customerRepository.GetAllCustomers();
 
-            // return View(customers);
+            return View(customers);
         }
 
         public IActionResult Create() => View();
 
         [HttpPost]
-        public async Task<IActionResult> Create(CustomerDTO customer)
+        public async Task<IActionResult> Create(CustomerDTO customerDTO)
         {
             var customer = new Customer
             {
-                /*
-                    CUSTOMER OBJECT IS CREATED FROM CUSTOMERDTO FIELDS GRABBED FROM FORM SUBMISSION
-                */
+                FirstName = customerDTO.FirstName,
+                LastName = customerDTO.LastName,
+                Phone = customerDTO.Phone,
+                Email = customerDTO.Email
             };
 
             await _customerRepository.AddCustomer(customer);
@@ -42,18 +43,19 @@ namespace VehicleManagementSystem.Controllers
             var customer = await _customerRepository.GetCustomerByID(id);
             //THIS WILL BE REPLACED FOR A 404 ROUTE FOR HANDLING NOT FOUND
             //MOST LIKELY GOING TO BE DONE THROUGH REDIRECTSWITHSTATUSCODES SO THIS SHOULD NOT CHANGE
-            if (!customer) return NotFound();
+            if (customer == null) return NotFound();
             return View(customer);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, CustomerDTO customer)
+        public async Task<IActionResult> Edit(int id, CustomerDTO customerDTO)
         {
             var customer = new Customer
             {
-                /*
-                    CUSTOMER OBJECT IS CREATED FROM CUSTOMERDTO FIELDS GRABBED FROM FORM SUBMISSION
-                */
+                FirstName = customerDTO.FirstName,
+                LastName = customerDTO.LastName,
+                Phone = customerDTO.Phone,
+                Email = customerDTO.Email
             };
 
             await _customerRepository.UpdateCustomer(id, customer);
