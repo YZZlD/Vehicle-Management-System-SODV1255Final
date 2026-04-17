@@ -2,7 +2,7 @@
 
 <div>
     <h2>Reservations</h2>
-    <a asp-action="Create">+ ADD NEW RESERVATION</a>
+    <a asp-action="SelectDate">+ ADD NEW RESERVATION</a>
 </div>
 
 <div>
@@ -10,27 +10,23 @@
         <table>
             <thead>
                 <tr>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Actions</th>
-                    </tr>
+                    <th>Customer</th>
+                    <th>Vehicle</th>
+                    <th>Reserved Date</th>
+                    <th>Due Date</th>
+                    <th>Price Total</th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach(Customer customer in Model)
+                @foreach(var reservation in Model)
                 {
                     <tr>
-                        <td>@customer.FirstName @customer.LastName</td>
-                        <td>@customer.Email</td>
-                        <td>@customer.Phone</td>
-                        <td>@customer.Age</td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@customer.CustomerId">Edit Customer</a>
-                            <a asp-action="Delete" asp-route-id="@customer.CustomerId">Delete Customer</a>
-                        </td>
+                        <td>@reservation.Customer.FirstName @reservation.Customer.LastName</td>
+                        <td>@reservation.Vehicle.Make @reservation.Vehicle.Model </td>
+                        <td>@reservation.ReservedDate.ToString("MMM dd, yyyy")</td>
+                        <td>@reservation.DueDate.ToString("MMM dd, yyyy")</td>
+                        <td>@reservation.PriceTotal.ToString("C")</td>
                     </tr>
                 }
             </tbody>
