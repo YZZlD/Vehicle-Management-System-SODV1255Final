@@ -1,30 +1,30 @@
-@* @model VehicleManagementSystem.Models.Vehicle *@
+@model VehicleManagementSystem.src.Models.VEHICLEMODEL
 
 <h1>Create New Vehicle</h1>
 
 <form asp-action="Create" method="post">
     <div>
-        <label asp-for="Model">Model: </label>
-        <input asp-for="Model" />
+        <label asp-for="model">Model: </label>
+        <input asp-for="model" />
     </div>
 
     <div>
-        <label asp-for="Make">Make: </label>
-        <input asp-for="Make" />
+        <label asp-for="make">Make: </label>
+        <input asp-for="make" />
     </div>
 
     <div>
-        <label asp-for="LicensePlate">License Plate: </label>
-        <input asp-for="LicensePlate" />
+        <label asp-for="licenseplate">License Plate: </label>
+        <input asp-for="licenseplate" />
     </div>
 
     <div>
-        <label asp-for="PriceRate">Price Rate ($/day): </label>
-        <input asp-for="LicensePlate" />
+        <label asp-for="pricerate">Price Rate ($/day): </label>
+        <input asp-for="pricerate" />
     </div>
 
     <div>
-        <label asp-for="ImageUrl">Image URL: </label>
+        <label asp-for="plaintextimageurl">Image URL: </label>
     </div>
 
     <button type="submit">Create Vehicle</button>

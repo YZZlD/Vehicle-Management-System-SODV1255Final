@@ -1,4 +1,4 @@
-@* @model List<VehicleManagementSystem.Models.Vehicle> *@
+@model List<VehicleManagementSystem.src.Models.VEHICLEMODEL>
 
 <div>
     <h2>Vehicles</h2>
@@ -6,18 +6,18 @@
 </div>
 
 <div>
-    @foreach(Vehicle vehicle in Model)
+    @foreach(var vehicle in Model)
     {
-        <div style="background-image: url('@(vehicle.ImageUrl ?? "/[PLACEHOLDER IMAGE LOCATION]")')">
+        <div style="background-image: url('@(vehicle.imageurlplaintext ?? "/[PLACEHOLDER IMAGE LOCATION]")')">
             <div>
-                <h3>@vehicle.Make @vehicle.Model</h3>
-                <p>@vehicle.LicensePlate</p>
-                <p>@vehicle.PriceRate</p>
+                <h3>@vehicle.make @vehicle.model</h3>
+                <p>@vehicle.licenseplate</p>
+                <p>@vehicle.pricerate</p>
             </div>
 
             <div>
-                <a asp-action="Edit" asp-route-id="@vehicle.VehicleId">Edit</a>
-                <a asp-action="Delete" asp-route-id="@vehicle.VehicleId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@vehicle.vehicleid">Edit</a>
+                <a asp-action="Delete" asp-route-id="@vehicle.vehicleid">Delete</a>
             </div>
         </div>
     }

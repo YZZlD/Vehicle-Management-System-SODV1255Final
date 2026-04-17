@@ -1,4 +1,4 @@
-@* @model List<VehicleManagementSystem.Models.Customer> *@
+@model List<VehicleManagementSystem.src.Models.USERMODEL>
 
 <div>
     <h2>Customers</h2>
@@ -20,16 +20,16 @@
             </thead>
 
             <tbody>
-                @foreach(Customer customer in Model)
+                @foreach(var customer in Model)
                 {
                     <tr>
-                        <td>@customer.FirstName @customer.LastName</td>
-                        <td>@customer.Email</td>
-                        <td>@customer.Phone</td>
-                        <td>@customer.Age</td>
+                        <td>@customer.fname @customer.lname</td>
+                        <td>@customer.email</td>
+                        <td>@customer.phonenumber</td>
+                        <td>@customer.age</td>
                         <td>
-                            <a asp-action="Edit" asp-route-id="@customer.CustomerId">Edit Customer</a>
-                            <a asp-action="Delete" asp-route-id="@customer.CustomerId">Delete Customer</a>
+                            <a asp-action="Edit" asp-route-id="@customer.userid">Edit Customer</a>
+                            <a asp-action="Delete" asp-route-id="@customer.userid">Delete Customer</a>
                         </td>
                     </tr>
                 }
