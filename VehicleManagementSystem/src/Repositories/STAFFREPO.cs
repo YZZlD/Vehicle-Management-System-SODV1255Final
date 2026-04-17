@@ -6,7 +6,7 @@ namespace VehicleManagementSystem.src.Repositories
     public class STAFFREPO
     {
         //public readonly STAFFDB staffdb;
-        public readonly APPCONTEXTDB appcontextdb;
+        private readonly APPCONTEXTDB appcontextdb;
 
         public async Task<List<Models.STAFFMODEL>> GetAllStaffs()
         {

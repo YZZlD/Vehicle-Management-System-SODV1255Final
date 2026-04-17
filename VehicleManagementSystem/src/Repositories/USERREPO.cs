@@ -6,7 +6,7 @@ namespace VehicleManagementSystem.src.Repositories
     public class USERREPO
     {
         //public readonly USERMODELDB userdb;
-        public readonly APPCONTEXTDB appcontextdb;
+        private readonly APPCONTEXTDB appcontextdb;
 
         public async Task<List<Models.USERMODEL>> GetAllUsers()
         {

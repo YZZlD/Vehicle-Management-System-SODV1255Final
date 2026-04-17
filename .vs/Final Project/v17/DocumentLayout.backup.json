@@ -98,8 +98,7 @@
               "RelativeToolTip": "VehicleManagementSystem\\src\\Repositories\\STAFFREPO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T15:26:40.877Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T15:26:40.877Z"
             },
             {
               "$type": "Document",
@@ -111,8 +110,7 @@
               "RelativeToolTip": "VehicleManagementSystem\\src\\Repositories\\RESERVEREPO.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAAADAAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T15:26:23.441Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T15:26:23.441Z"
             },
             {
               "$type": "Document",
@@ -124,8 +122,7 @@
               "RelativeToolTip": "VehicleManagementSystem\\src\\Repositories\\USERREPO.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAxwA8AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T15:26:53.191Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T15:26:53.191Z"
             },
             {
               "$type": "Document",
@@ -150,8 +147,7 @@
               "RelativeToolTip": "VehicleManagementSystem\\src\\Models\\STAFFMODEL.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T01:57:06.74Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T01:57:06.74Z"
             },
             {
               "$type": "Document",
@@ -163,8 +159,7 @@
               "RelativeToolTip": "VehicleManagementSystem\\src\\Data\\STAFFDB.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T01:57:56.669Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T01:57:56.669Z"
             },
             {
               "$type": "Document",
@@ -176,8 +171,7 @@
               "RelativeToolTip": "VehicleManagementSystem\\src\\Data\\RESERVATIONDB.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T01:47:45.589Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T01:47:45.589Z"
             },
             {
               "$type": "Document",
@@ -189,8 +183,7 @@
               "RelativeToolTip": "VehicleManagementSystem\\src\\Data\\USERMODELDB.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T01:47:56.769Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T01:47:56.769Z"
             },
             {
               "$type": "Document",
@@ -202,8 +195,7 @@
               "RelativeToolTip": "VehicleManagementSystem\\src\\Data\\VEHICLEMODELDB.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T01:48:09.729Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T01:48:09.729Z"
             },
             {
               "$type": "Document",
@@ -215,8 +207,7 @@
               "RelativeToolTip": "VehicleManagementSystem\\src\\Models\\VEHICLEMODEL.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T01:39:26.717Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T01:39:26.717Z"
             },
             {
               "$type": "Document",
@@ -228,8 +219,7 @@
               "RelativeToolTip": "VehicleManagementSystem\\src\\Models\\USERMODEL.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T01:34:01.804Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T01:34:01.804Z"
             },
             {
               "$type": "Document",
@@ -241,8 +231,7 @@
               "RelativeToolTip": "VehicleManagementSystem\\src\\Models\\RESERVATIONMODEL.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwA0AAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T01:39:10.059Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T01:39:10.059Z"
             },
             {
               "$type": "Document",
@@ -254,8 +243,7 @@
               "RelativeToolTip": "VehicleManagementSystem\\src\\Data\\APPCONTEXTDB.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T19:25:05.255Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T19:25:05.255Z"
             },
             {
               "$type": "Document",
@@ -267,8 +255,7 @@
               "RelativeToolTip": "VehicleManagementSystem\\src\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T01:51:10.806Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T01:51:10.806Z"
             },
             {
               "$type": "Document",
@@ -280,8 +267,7 @@
               "RelativeToolTip": "VehicleManagementSystem\\.gitignore",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-04-15T02:25:28.721Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T02:25:28.721Z"
             },
             {
               "$type": "Document",
@@ -293,8 +279,7 @@
               "RelativeToolTip": "VehicleManagementSystem\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-04-15T01:52:45.822Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T01:52:45.822Z"
             },
             {
               "$type": "Document",
