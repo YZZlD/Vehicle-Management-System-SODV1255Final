@@ -4,7 +4,7 @@ using Microsoft.VisualBasic;
 
 namespace VehicleManagementSystem.Controllers
 {
-    public class ReportController : Controller
+    public class ReportController : BaseController
     {
         // private readonly ReservationRepository _reservationRepository;
 

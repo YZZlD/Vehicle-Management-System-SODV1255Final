@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace VehicleManagementSystem.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomerController : BaseController
     {
         //private readonly CustomerRepository _customerRepository;
 

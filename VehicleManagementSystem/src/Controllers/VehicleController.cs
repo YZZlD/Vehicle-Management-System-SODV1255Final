@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace VehicleManagementSystem.Controllers
 {
-    public class VehicleController : Controller
+    public class VehicleController : BaseController
     {
         private readonly VehicleRepository _vehicleRepository;
 

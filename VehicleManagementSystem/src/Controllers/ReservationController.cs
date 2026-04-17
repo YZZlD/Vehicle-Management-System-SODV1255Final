@@ -3,7 +3,7 @@ using VehicleManagementSystem.Helpers;
 
 namespace VehicleManagementSystem.Controllers
 {
-    public class ReservationController : Controller
+    public class ReservationController : BaseController
     {
         // private readonly ReservationRepository _reservationRepository;
         // private readonly CustomerRepository _customerRepository;
