@@ -1,0 +1,74 @@
+@* @model VehicleManagementSystem.Models.ReportViewModel *@
+
+<div>
+    <div>
+        <h1>Reports</h1>
+        <div>
+            <form asp-action="Index" method="get">
+                <label for="dateFrom">Date From</label>
+                <input id="dateFrom" name="dateFrom" type="date" />
+
+                <label for="dateTo">Date To</label>
+                <input id="dateTo" name="dateTo" type="date" />
+
+                <label for="vehicleMake">Make</label>
+                <select id="vehicleMake" name="vehicleMake">
+                    <option value="">All Makes</option>
+                    @foreach(var make in Model.Makes)
+                    {
+                        <option value="@make">@make</option>
+                    }
+                </select>
+
+
+                <label for="minAge">Min Age</label>
+                <input id="minAge" name="minAge" type="number" />
+
+                <label for="maxAge">Max Age</label>
+                <input id="maxAge" name="maxAge" type="number" />
+
+                <button type="submit">Generate Reservation Report</button>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <h1>Summary</h1>
+        <div>
+            <div>@Model.TotalReservations</div>
+            <div>@Model.TotalRevenue.ToString("C")</div>
+            <div>@Model.ActiveRentals</div>
+            <div>@Model.MostPopularVehicle</div>
+        </div>
+    </div>
+
+    <div>
+        <h1>RESERVATIONS INCLUDED IN REPORT</h1>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Vehicle</th>
+                        <th>Reserved Date</th>
+                        <th>Due Date</th>
+                        <th>Price Total</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach(var reservation in Model.Reservations)
+                    {
+                        <tr>
+                            <td>@reservation.Customer.FirstName @reservation.Customer.LastName</td>
+                            <td>@reservation.Vehicle.Make @reservation.Vehicle.Model </td>
+                            <td>@reservation.ReservedDate.ToString("MMM dd, yyyy")</td>
+                            <td>@reservation.DueDate.ToString("MMM dd, yyyy")</td>
+                            <td>@reservation.PriceTotal.ToString("C")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

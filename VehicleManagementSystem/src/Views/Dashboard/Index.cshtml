@@ -86,7 +86,7 @@
                 <div>
                     <p>@reservation.Customer?.FirstName @reservation.Customer?.LastName</p>
                     <p>@reservation.Vehicle?.Make @reservation.Vehicle?.Model</p>
-                    <p>@reservation.DueDate.ToString("dd-mm-yyyy")</p>
+                    <p>@reservation.DueDate.ToString("MMM dd, yyyy")</p>
                 </div>
             }
         </div>
@@ -100,7 +100,7 @@
             <div>
                 <p>@reservation.Customer?.FirstName @reservation.Customer?.LastName</p>
                 <p>@reservation.Vehicle?.Make @reservation.Vehicle?.Model</p>
-                <p>@reservation.DueDate.ToString("dd-mm-yyyy")</p>
+                <p>@reservation.DueDate.ToString("MMM dd, yyyy")</p>
                 @* THIS WILL BE STYLED DANGER STYLE *@
             </div>
         }
