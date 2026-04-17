@@ -1,15 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using VehicleManagementSystem.Helpers;
+using VehicleManagementSystem.src.Models;
+using VehicleManagementSystem.src.Repositories;
 
 namespace VehicleManagementSystem.Controllers
 {
     public class ReservationController : BaseController
     {
-        private readonly ReservationRepository _reservationRepository;
-        private readonly CustomerRepository _customerRepository;
-        private readonly VehicleRepository _vehicleRepository;
+        private readonly RESERVEREPO _reservationRepository;
+        private readonly USERREPO _customerRepository;
+        private readonly VEHICLEREPO _vehicleRepository;
 
-        public ReservationController(ReservationRepository reservationRepository, CustomerRepository customerRepository, VehicleRepository vehicleRepository)
+        public ReservationController(RESERVEREPO reservationRepository, USERREPO customerRepository, VEHICLEREPO vehicleRepository)
         {
             _reservationRepository = reservationRepository;
             _customerRepository = customerRepository;
@@ -18,7 +20,7 @@ namespace VehicleManagementSystem.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var reservations = await _reservationRepository.GetAllReservations();
+            var reservations = await _reservationRepository.index();
 
             return View(reservations);
         }
@@ -31,17 +33,21 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> SelectDate(DateTime reservedDate, DateTime dueDate)
         {
-            var reservedVehicleIds = await _reservationRepository.GetAllReservations()
-                                        .Where(r => r.ReservedDate < dueDate && r.DueDate > reservedDate)
-                                        .Select(r => r.VehicleId)
+            var reservations = await _reservationRepository.index();
+            var vehicles = await _vehicleRepository.Index();
+
+
+            var reservedVehicleIds = reservations
+                                        .Where(reservation => reservation.reservedate < dueDate && reservation.duedate > reservedDate)
+                                        .Select(r => r.vehicleid)
                                         .Distinct()
                                         .ToList();
 
-            var availableVehicles = await _vehicleRepository.GetAllVehicles()
-                                        .Where(vehicle => !reservedVehicleIds.Contains(vehicle.VehicleId))
+            var availableVehicles = vehicles
+                                        .Where(vehicle => !reservedVehicleIds.Contains(vehicle.vehicleid))
                                         .ToList();
 
-            ViewBag.Customers = await _customerRepository.GetAllCustomers();
+            ViewBag.Customers = await _customerRepository.GetAllUsers();
             ViewBag.Vehicles = availableVehicles;
             ViewBag.ReservedDate = reservedDate;
             ViewBag.DueDate = dueDate;
@@ -52,25 +58,26 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(int customerId, int vehicleId, DateTime reservedDate, DateTime dueDate)
         {
-            var customer = await _customerRepository.GetCustomerById(customerId);
-            var vehicle = await _vehicleRepository.GetVehicleById(vehicleId);
+            var customer = await _customerRepository.getuserbyid(customerId);
+            var vehicle = await _vehicleRepository.GETBYID();
+            //THIS WILL NOT WORK UNTIL GET BY ID IS IMPLEMENTED
 
-            var reservation = new Reservation
+            var reservation = new RESERVATIONMODEL
             {
-                CustomerId = customerId,
-                VehicleId = vehicleId,
-                ReservedDate = reservedDate,
-                DueDate = dueDate,
-                PriceTotal = CalculatePrice(vehicle, reservedDate, dueDate, null)
+                userid = customerId,
+                vehicleid = vehicleId,
+                reservedate = reservedDate,
+                duedate = dueDate,
+                price = CalculatePrice(vehicle, reservedDate, dueDate, null)
             };
 
-            await _reservationRepository.Add(reservation);
+            _reservationRepository.Addreserve(reservation);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var reservation = await _reservationRepository.GetReservationById(id);
+            var reservation = _reservationRepository.GETBYID();
 
             if(reservation == null) return NotFound();
             return View(reservation);
@@ -79,17 +86,17 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, DateTime? returnedDate)
         {
-            var reservation = await _reservationRepository.GetReservationById(id);
+            var reservation = await _reservationRepository.GETBYID
 
             if(reservation == null) return NotFound();
 
-            var vehicle = await _vehicleRepository.GetVehicleById(reservation.VehicleId);
+            var vehicle = await _vehicleRepository.GETBYID(reservation.VehicleId);
 
             reservation.ReturnedDate = returnedDate;
 
             reservation.PriceTotal = CalculatePrice(vehicle, reservation.ReservedDate, reservation.DueDate, reservation.ReturnedDate);
 
-            await _reservationRepository.UpdateReservation(reservation);
+            await _reservationRepository.Edit(reservation);
 
             return RedirectToAction("Index");
         }
@@ -97,7 +104,7 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            await _reservationRepository.DeleteReservation(id);
+            _reservationRepository.Deletebyid(id);
 
             return RedirectToAction("Index");
         }
