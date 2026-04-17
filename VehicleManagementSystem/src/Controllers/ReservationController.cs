@@ -86,11 +86,11 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, DateTime? returnedDate)
         {
-            var reservation = await _reservationRepository.GETBYID
+            var reservation = await _reservationRepository.getbyid(id);
 
             if(reservation == null) return NotFound();
 
-            var vehicle = await _vehicleRepository.GETBYID(reservation.VehicleId);
+            var vehicle = await _vehicleRepository.Getbyid(reservation.vehicleid);
 
             reservation.ReturnedDate = returnedDate;
 
