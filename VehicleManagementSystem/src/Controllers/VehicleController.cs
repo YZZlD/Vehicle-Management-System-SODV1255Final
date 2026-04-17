@@ -1,19 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
+using VehicleManagementSystem.src.Models;
+using VehicleManagementSystem.src.Repositories;
 
 namespace VehicleManagementSystem.Controllers
 {
     public class VehicleController : BaseController
     {
-        private readonly VehicleRepository _vehicleRepository;
+        private readonly VEHICLEREPO _vehicleRepository;
 
-        public VehicleController(VehicleRepository vehicleRepository)
+        public VehicleController(VEHICLEREPO vehicleRepository)
         {
             _vehicleRepository = vehicleRepository;
         }
 
         public async Task<IActionResult> Index()
         {
-            var vehicles = await _vehicleRepository.GetAllVehicles();
+            var vehicles = await _vehicleRepository.Index();
 
             return View(vehicles);
         }
@@ -21,47 +23,46 @@ namespace VehicleManagementSystem.Controllers
         public async Task<IActionResult> Create() => View();
 
         [HttpPost]
-        public async Task<IActionResult> Create(VehicleController vehicleDTO)
+        public async Task<IActionResult> Create(VehicleDTO vehicleDTO)
         {
-            var vehicle = new Vehicle
+            var vehicle = new VEHICLEMODEL
             {
-                Make = vehicleDTO.Make,
-                Model = vehicleDTO.Model,
-                LicensePlate = vehicleDTO.LicensePlate,
-                PriceRate = vehicleDTO.PriceRate,
-                ImageURL = vehicleDTO.ImageURL
+                make = vehicleDTO.Make,
+                model = vehicleDTO.Model,
+                licenseplate = vehicleDTO.LicensePlate,
+                price = vehicleDTO.PriceRate,
+                imageurl = vehicleDTO.ImageURL
             };
 
-            await _vehicleRepository.AddVehicle(vehicle);
+            _vehicleRepository.AddVehicle(vehicle);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var vehicle = await _vehicleRepository.GetVehicleById(id);
+            var vehicle = await _vehicleRepository.GETBYID(id);
             if(!vehicle) return NotFound();
             return View(vehicle);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, VehicleDTO vehicle)
+        public async Task<IActionResult> Edit(int id, VehicleDTO vehicleDTO)
         {
-            var vehicle = new Vehicle
-            {
-                Make = vehicleDTO.Make,
-                Model = vehicleDTO.Model,
-                LicensePlate = vehicleDTO.LicensePlate,
-                PriceRate = vehicleDTO.PriceRate,
-                ImageURL = vehicleDTO.ImageURL
-            };
+            var vehicle = await _vehicleRepository.GETBYID(id);
 
-            await _vehicleRepository.UpdateVehicle(id, vehicle);
+            vehicle.make = vehicleDTO.Make;
+            vehicle.model = vehicleDTO.Model;
+            vehicle.licenseplate = vehicleDTO.LicensePlate;
+            vehicle.price = vehicleDTO.PriceRate;
+            vehicle.imageurl = vehicleDTO.ImageURL;
+
+            _vehicleRepository.EditVehicle(vehicle);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var vehicle = await _vehicleRepository.GetVehicleById(id);
+            var vehicle = await _vehicleRepository.GETBYID(id);
             if(vehicle == null) return NotFound();
 
             return View(vehicle);
@@ -70,7 +71,7 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteVehicle(int id)
         {
-            await _vehicleRepository.DeleteVehicle(id);
+            _vehicleRepository.DeleteVehicle(id);
 
             return RedirectToAction("Index");
         }

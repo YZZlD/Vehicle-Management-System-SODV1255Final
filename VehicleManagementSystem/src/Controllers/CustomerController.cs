@@ -1,22 +1,22 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-// using VehicleManagementSystem.Repositories;
-// using VehicleManagementSystem.Models;
+using VehicleManagementSystem.src.Models;
+using VehicleManagementSystem.src.Repositories;
 
 namespace VehicleManagementSystem.Controllers
 {
     public class CustomerController : BaseController
     {
-        private readonly CustomerRepository _customerRepository;
+        private readonly USERREPO _customerRepository;
 
-        public CustomerController(CustomerRepository customerRepository)
+        public CustomerController(USERREPO customerRepository)
         {
             _customerRepository = customerRepository;
         }
 
         public async Task<IActionResult> Index()
         {
-            var customers = await _customerRepository.GetAllCustomers();
+            var customers = await _customerRepository.GetAllUsers();
 
             return View(customers);
         }
@@ -26,21 +26,22 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CustomerDTO customerDTO)
         {
-            var customer = new Customer
+            var customer = new USERMODEL
             {
-                FirstName = customerDTO.FirstName,
-                LastName = customerDTO.LastName,
-                Phone = customerDTO.Phone,
-                Email = customerDTO.Email
+                fname = customerDTO.FirstName,
+                lname = customerDTO.LastName,
+                phonenumber = customerDTO.PhoneNumber,
+                email = customerDTO.Email,
+                age = customerDTO.Age
             };
 
-            await _customerRepository.AddCustomer(customer);
+            _customerRepository.AddCustomer(customer);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var customer = await _customerRepository.GetCustomerByID(id);
+            var customer = await _customerRepository.getuserbyid(id);
             //THIS WILL BE REPLACED FOR A 404 ROUTE FOR HANDLING NOT FOUND
             //MOST LIKELY GOING TO BE DONE THROUGH REDIRECTSWITHSTATUSCODES SO THIS SHOULD NOT CHANGE
             if (customer == null) return NotFound();
@@ -50,21 +51,20 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, CustomerDTO customerDTO)
         {
-            var customer = new Customer
-            {
-                FirstName = customerDTO.FirstName,
-                LastName = customerDTO.LastName,
-                Phone = customerDTO.Phone,
-                Email = customerDTO.Email
-            };
+            var customer = await _customerRepository.getuserbyid(id);
 
-            await _customerRepository.UpdateCustomer(id, customer);
+            customer.fname = customerDTO.FirstName;
+            customer.lname = customerDTO.LastName;
+            customer.phonenumber = customerDTO.PhoneNumber;
+            customer.email = customerDTO.Email;
+
+            _customerRepository.Edit(customer);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var customer = await _customerRepository.GetCustomerByID(id);
+            var customer = await _customerRepository.getuserbyid(id);
             if(customer == null) return NotFound();
 
             return View(customer);
@@ -73,7 +73,7 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteCustomer(int id)
         {
-            await _customerRepository.DeleteCustomer(id);
+            _customerRepository.Deletebyid(id);
 
             return RedirectToAction("Index");
         }

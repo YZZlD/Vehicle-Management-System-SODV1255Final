@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
+using VehicleManagementSystem.src.Repositories;
 
 namespace VehicleManagementSystem.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly AuthRepository _authRepository;
+        private readonly STAFFREPO _authRepository;
 
-        public AuthController(AuthRepository authRepository)
+        public AuthController(STAFFREPO authRepository)
         {
             _authRepository = authRepository;
         }
@@ -22,7 +23,7 @@ namespace VehicleManagementSystem.Controllers
                 return View();
             }
 
-            User user = await _userRepository.CheckUserCredentials(username, password);
+            var user = await _authRepository.CheckUserCredentials(username, password);
 
             if (user == null)
             {
