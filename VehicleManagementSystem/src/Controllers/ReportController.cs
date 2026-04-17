@@ -1,12 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
+using VehicleManagementSystem.src.Repositories;
+using VehicleManagementSystem.ViewModels;
 
 namespace VehicleManagementSystem.Controllers
 {
     public class ReportController : BaseController
     {
-        private readonly ReservationRepository _reservationRepository;
+        private readonly RESERVEREPO _reservationRepository;
 
-        public ReportController(ReservationRepository reservationRepository)
+        public ReportController(RESERVEREPO reservationRepository)
         {
             _reservationRepository = reservationRepository;
         }
@@ -15,12 +17,12 @@ namespace VehicleManagementSystem.Controllers
         //With empty parameters all reservations will be included.
         public async Task<IActionResult> Index(string dateFrom, string dateTo, string vehicleMake, int? minAge, int? maxAge)
         {
-            //THIS MAY BREAK WITH REPOSITORY INTRODUCTION SO IT WILL BE FIXED THEN
+            // This did in fact break include must be included in the repository calls to grab the vehicle and customer objects implicitly from the object
 
-            var reservations = await _reservationRepository.GetAllReservations().Include(reservation => reservation.Vehicle).Include(reservation => reservation.Customer);
+            var reservations = await _reservationRepository.index().Include(reservation => reservation.Vehicle).Include(reservation => reservation.Customer);
 
             var makes = await _reservationRepository
-                                .GetAllReservations()
+                                .index()
                                 .Include(reservation => reservation.Vehicle)
                                 .Select(reservation => reservation.Vehicle.Make)
                                 .Distinct()
