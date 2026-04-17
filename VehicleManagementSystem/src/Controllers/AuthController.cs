@@ -16,10 +16,22 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string username, string password)
         {
-            /*
-                REPOSITORY LOGIC + SESSION HANDLING LOGIC GOES HERE
-            */
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                ViewBag.Error = "Invalid input";
+                return View();
+            }
 
+            User user = await _userRepository.CheckUserCredentials(username, password);
+
+            if (user == null)
+            {
+                ViewBag.Error = "Username or Password incorrect";
+                return View();
+            }
+
+            HttpContext.Session.SetInt32("UserID", user.ID);
+            HttpContext.Session.SetString("Username", user.Username);
             return RedirectToAction("Index", "Dashboard");
         }
 
@@ -28,9 +40,9 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(string username, string password)
         {
-            /*
-                REPOSITORY LOGIC + SESSION HANDLING LOGIC GOES HERE
-            */
+            User user = new User { Username = username, Password = password};
+
+            await _userRepository.AddUser(user);
 
             return RedirectToAction("Login");
         }
