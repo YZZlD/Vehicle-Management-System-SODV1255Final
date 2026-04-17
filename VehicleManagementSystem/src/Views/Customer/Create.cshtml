@@ -1,26 +1,26 @@
-@* @model VehicleManagementSystem.Models.Customer *@
+@model VehicleManagementSystem.src.Models.USERMODEL
 
 <h1>Create New Customer</h1>
 
 <form asp-action="Create" method="post">
     <div>
-        <label asp-for="FirstName"></label>
-        <input asp-for="FirstName" />
+        <label asp-for="fname"></label>
+        <input asp-for="fname" />
     </div>
 
     <div>
-        <label asp-for="LastName"></label>
-        <input asp-for="LastName" />
+        <label asp-for="fname"></label>
+        <input asp-for="fname" />
     </div>
 
     <div>
-        <label asp-for="Email"></label>
-        <input asp-for="Email" />
+        <label asp-for="email"></label>
+        <input asp-for="email" />
     </div>
 
     <div>
-        <label asp-for="Phone"></label>
-        <input asp-for="Phone" />
+        <label asp-for="phonenumber"></label>
+        <input asp-for="phonenumber" />
     </div>
 
     <button type="submit">Create Customer</button>

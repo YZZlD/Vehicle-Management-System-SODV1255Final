@@ -59,7 +59,7 @@ namespace VehicleManagementSystem.Controllers
         public async Task<IActionResult> Create(int customerId, int vehicleId, DateTime reservedDate, DateTime dueDate)
         {
             var customer = await _customerRepository.getuserbyid(customerId);
-            var vehicle = await _vehicleRepository.GETBYID();
+            var vehicle = await _vehicleRepository.Getbyid(vehicleId);
             //THIS WILL NOT WORK UNTIL GET BY ID IS IMPLEMENTED
 
             var reservation = new RESERVATIONMODEL
@@ -77,7 +77,7 @@ namespace VehicleManagementSystem.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var reservation = _reservationRepository.GETBYID();
+            var reservation = _reservationRepository.getbyid(id);
 
             if(reservation == null) return NotFound();
             return View(reservation);
@@ -86,17 +86,17 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, DateTime? returnedDate)
         {
-            var reservation = await _reservationRepository.GETBYID
+            var reservation = await _reservationRepository.getbyid(id);
 
             if(reservation == null) return NotFound();
 
-            var vehicle = await _vehicleRepository.GETBYID(reservation.VehicleId);
+            var vehicle = await _vehicleRepository.Getbyid(reservation.vehicleid);
 
-            reservation.ReturnedDate = returnedDate;
+            reservation.returneddate = returnedDate;
 
-            reservation.PriceTotal = CalculatePrice(vehicle, reservation.ReservedDate, reservation.DueDate, reservation.ReturnedDate);
+            reservation.price = CalculatePrice(vehicle, reservation.reservedate, reservation.duedate, reservation.returneddate);
 
-            await _reservationRepository.Edit(reservation);
+            _reservationRepository.Edit(reservation);
 
             return RedirectToAction("Index");
         }

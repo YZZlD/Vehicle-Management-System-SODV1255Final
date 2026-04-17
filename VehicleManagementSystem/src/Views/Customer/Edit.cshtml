@@ -1,29 +1,29 @@
-@* @model VehicleManagementSystem.Models.Customer *@
+@model VehicleManagementSystem.src.Models.USERMODEL
 
 <h1>Edit Customer</h1>
 
 <form asp-action="Edit" method="post">
     @* Optional ID binding for the edit method. Unnecessary with id route binding but doesn't hurt to add. *@
-    <input type="hidden" asp-for="CustomerId" />
+    <input type="hidden" asp-for="userid" />
 
     <div class="form-group">
-        <label asp-for="FirstName"></label>
-        <input asp-for="FirstName"/>
+        <label asp-for="fname"></label>
+        <input asp-for="fname"/>
     </div>
 
     <div class="form-group">
-        <label asp-for="LastName"></label>
-        <input asp-for="LastName"/>
+        <label asp-for="lname"></label>
+        <input asp-for="lname"/>
     </div>
 
     <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email"/>
+        <label asp-for="email"></label>
+        <input asp-for="email"/>
     </div>
 
     <div class="form-group">
-        <label asp-for="PhoneNumber"></label>
-        <input asp-for="PhoneNumber"/>
+        <label asp-for="phonenumber"></label>
+        <input asp-for="phonenumber"/>
     </div>
 
     <button type="submit">Save Changes</button>

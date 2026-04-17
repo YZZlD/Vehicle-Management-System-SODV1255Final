@@ -40,15 +40,15 @@ namespace VehicleManagementSystem.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var vehicle = await _vehicleRepository.GETBYID(id);
-            if(!vehicle) return NotFound();
+            var vehicle = await _vehicleRepository.Getbyid(id);
+            if(vehicle == null) return NotFound();
             return View(vehicle);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id, VehicleDTO vehicleDTO)
         {
-            var vehicle = await _vehicleRepository.GETBYID(id);
+            var vehicle = await _vehicleRepository.Getbyid(id);
 
             vehicle.make = vehicleDTO.Make;
             vehicle.model = vehicleDTO.Model;
@@ -62,7 +62,7 @@ namespace VehicleManagementSystem.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var vehicle = await _vehicleRepository.GETBYID(id);
+            var vehicle = await _vehicleRepository.Getbyid(id);
             if(vehicle == null) return NotFound();
 
             return View(vehicle);
