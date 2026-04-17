@@ -8,6 +8,11 @@ namespace VehicleManagementSystem.src.Repositories
         //public readonly STAFFDB staffdb;
         private readonly APPCONTEXTDB appcontextdb;
 
+        public STAFFREPO(APPCONTEXTDB context)
+        {
+            appcontextdb = context;
+        }
+
         public async Task<List<Models.STAFFMODEL>> GetAllStaffs()
         {
             //GET LIST
@@ -19,7 +24,7 @@ namespace VehicleManagementSystem.src.Repositories
             //GET BY ID
             return await appcontextdb.staffmodel.FirstOrDefaultAsync(u => u.staffid == id);
         }
-        public async void AddUser(STAFFMODEL newstaff)
+        public async Task AddUser(STAFFMODEL newstaff)
         {
             await appcontextdb.staffmodel.AddAsync(newstaff);
             await appcontextdb.SaveChangesAsync();

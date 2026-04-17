@@ -35,7 +35,7 @@ namespace VehicleManagementSystem.Controllers
                 age = customerDTO.Age
             };
 
-            _customerRepository.AddCustomer(customer);
+            await _customerRepository.AddCustomer(customer);
             return RedirectToAction("Index");
         }
 
@@ -58,7 +58,7 @@ namespace VehicleManagementSystem.Controllers
             customer.phonenumber = customerDTO.PhoneNumber;
             customer.email = customerDTO.Email;
 
-            _customerRepository.Edit(customer);
+            await _customerRepository.Edit(customer);
             return RedirectToAction("Index");
         }
 
@@ -73,7 +73,7 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteCustomer(int id)
         {
-            _customerRepository.Deletebyid(id);
+            await _customerRepository.Deletebyid(id);
 
             return RedirectToAction("Index");
         }

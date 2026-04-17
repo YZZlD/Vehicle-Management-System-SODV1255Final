@@ -71,7 +71,7 @@ namespace VehicleManagementSystem.Controllers
                 price = PricingHelper.CalculatePrice(vehicle, reservedDate, dueDate, null)
             };
 
-            _reservationRepository.Addreserve(reservation);
+            await _reservationRepository.Addreserve(reservation);
             return RedirectToAction("Index");
         }
 
@@ -96,7 +96,7 @@ namespace VehicleManagementSystem.Controllers
 
             reservation.price = PricingHelper.CalculatePrice(vehicle, reservation.reservedate, reservation.duedate, reservation.returneddate);
 
-            _reservationRepository.Edit(reservation);
+            await _reservationRepository.Edit(reservation);
 
             return RedirectToAction("Index");
         }
@@ -104,7 +104,7 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            _reservationRepository.Deletebyid(id);
+            await _reservationRepository.Deletebyid(id);
 
             return RedirectToAction("Index");
         }

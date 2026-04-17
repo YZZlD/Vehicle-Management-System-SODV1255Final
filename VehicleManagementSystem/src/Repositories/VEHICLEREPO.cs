@@ -8,6 +8,11 @@ namespace VehicleManagementSystem.src.Repositories
     {
         private readonly APPCONTEXTDB appdb;
 
+        public VEHICLEREPO(APPCONTEXTDB context)
+        {
+            appdb = context;
+        }
+
         public async Task<List<VEHICLEMODEL>> Index()
         {
             return await appdb.vehiclemodel.ToListAsync();
@@ -16,12 +21,12 @@ namespace VehicleManagementSystem.src.Repositories
         {
             return await appdb.vehiclemodel.FirstOrDefaultAsync(u => u.vehicleid == id);
         }
-        public async void AddVehicle(VEHICLEMODEL newvehicle)
+        public async Task AddVehicle(VEHICLEMODEL newvehicle)
         {
             await appdb.vehiclemodel.AddAsync(newvehicle);
             await appdb.SaveChangesAsync();
         }
-        public async void EditVehicle(VEHICLEMODEL newvehicle)
+        public async Task EditVehicle(VEHICLEMODEL newvehicle)
         {
             VEHICLEMODEL vehiclecheck = await appdb.vehiclemodel.Where(u => u.vehicleid == newvehicle.vehicleid).FirstOrDefaultAsync();
             if (vehiclecheck != null)
@@ -35,7 +40,7 @@ namespace VehicleManagementSystem.src.Repositories
             );
             await appdb.SaveChangesAsync();
         }
-        public async void DeleteVehicle(int id)
+        public async Task DeleteVehicle(int id)
         {
             await appdb.vehiclemodel.Where(u=> u.vehicleid == id).ExecuteDeleteAsync();
             await appdb.SaveChangesAsync();

@@ -9,11 +9,16 @@ namespace VehicleManagementSystem.src.Repositories
     {
         private readonly APPCONTEXTDB appdb;
 
+        public RESERVEREPO(APPCONTEXTDB context)
+        {
+            appdb = context;
+        }
+
         public async Task<List<RESERVATIONMODEL>> index()
         {
             return await appdb.reservationmodel.Include(b=>b.vehicle).Include(b=>b.user).ToListAsync();
         }
-        public async void Addreserve(RESERVATIONMODEL newreservation)
+        public async Task Addreserve(RESERVATIONMODEL newreservation)
         {
             await appdb.reservationmodel.AddAsync(newreservation);
             await appdb.SaveChangesAsync();
@@ -22,12 +27,12 @@ namespace VehicleManagementSystem.src.Repositories
         {
             return await appdb.reservationmodel.Include(b => b.vehicle).Include(b => b.userid).FirstOrDefaultAsync(u => u.reservationid == id);
         }
-        public async void Deletebyid(int id)
+        public async Task Deletebyid(int id)
         {
             await appdb.reservationmodel.Where(u => u.reservationid == id).ExecuteDeleteAsync();
             await appdb.SaveChangesAsync();
         }
-        public async void Edit(RESERVATIONMODEL updatedreservation)
+        public async Task Edit(RESERVATIONMODEL updatedreservation)
         {
             RESERVATIONMODEL RESERVECHECK = await appdb.reservationmodel.FirstOrDefaultAsync(u => u.reservationid == updatedreservation.reservationid);
             if (RESERVECHECK == null)
@@ -47,7 +52,7 @@ namespace VehicleManagementSystem.src.Repositories
                 );
         }
 
-        public async void Delete(int id)
+        public async Task Delete(int id)
         {
             await appdb.reservationmodel.Where(u=>u.reservationid == id).ExecuteDeleteAsync();
             await appdb.SaveChangesAsync();

@@ -34,7 +34,7 @@ namespace VehicleManagementSystem.Controllers
                 imagelinkplaintext = vehicleDTO.ImageURL
             };
 
-            _vehicleRepository.AddVehicle(vehicle);
+            await _vehicleRepository.AddVehicle(vehicle);
             return RedirectToAction("Index");
         }
 
@@ -56,7 +56,7 @@ namespace VehicleManagementSystem.Controllers
             vehicle.price = vehicleDTO.PriceRate;
             vehicle.imagelinkplaintext = vehicleDTO.ImageURL;
 
-            _vehicleRepository.EditVehicle(vehicle);
+            await _vehicleRepository.EditVehicle(vehicle);
             return RedirectToAction("Index");
         }
 
@@ -71,7 +71,7 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteVehicle(int id)
         {
-            _vehicleRepository.DeleteVehicle(id);
+            await _vehicleRepository.DeleteVehicle(id);
 
             return RedirectToAction("Index");
         }
