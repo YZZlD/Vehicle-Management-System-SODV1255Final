@@ -299,3 +299,8 @@ input, select {
     margin-bottom: 6px;
     color: #900;
 }
+
+.field-error {
+    color: #900;
+    font-size: 12px;
+}

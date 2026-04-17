@@ -33,11 +33,17 @@ namespace VehicleManagementSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SelectDate(DateTime reservedDate, DateTime dueDate)
+        public async Task<IActionResult> SelectDate(DateTime? reservedDate, DateTime? dueDate)
         {
             var reservations = await _reservationRepository.index();
             var vehicles = await _vehicleRepository.Index();
 
+            if(reservedDate == null || dueDate == null)
+            {
+                ModelState.AddModelError("", "Please select a valid time period.");
+
+                return View();
+            }
 
             var reservedVehicleIds = reservations
                                         .Where(reservation => reservation.reservedate < dueDate && reservation.duedate > reservedDate)
@@ -69,16 +75,48 @@ namespace VehicleManagementSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int customerId, int vehicleId, DateTime reservedDate, DateTime dueDate)
+        public async Task<IActionResult> Create(int? customerId, int? vehicleId, DateTime reservedDate, DateTime dueDate)
         {
-            var customer = await _customerRepository.getuserbyid(customerId);
-            var vehicle = await _vehicleRepository.Getbyid(vehicleId);
-            //THIS WILL NOT WORK UNTIL GET BY ID IS IMPLEMENTED
+            if(customerId == null || vehicleId == null)
+            {
+                ModelState.AddModelError("", "Please select a customer and vehicle.");
+
+                var customers = await _customerRepository.GetAllUsers();
+                ViewBag.Customers = customers.Select(user => new SelectListItem
+                {
+                    Value = user.userid.ToString(),
+                    Text = user.fname + user.lname
+                }).ToList();
+
+                var reservations = await _reservationRepository.index();
+                var vehicles = await _vehicleRepository.Index();
+                var reservedVehicleIds = reservations
+                                        .Where(reservation => reservation.reservedate < dueDate && reservation.duedate > reservedDate)
+                                        .Select(r => r.vehicleid)
+                                        .Distinct()
+                                        .ToList();
+
+                var availableVehicles = vehicles
+                                            .Where(vehicle => !reservedVehicleIds.Contains(vehicle.vehicleid))
+                                            .ToList();
+                ViewBag.Vehicles = availableVehicles.Select(vehicle => new SelectListItem
+                {
+                    Value = vehicle.vehicleid.ToString(),
+                    Text = vehicle.make + vehicle.model
+                }).ToList();
+
+                ViewBag.ReservedDate = reservedDate;
+                ViewBag.DueDate = dueDate;
+
+                return View();
+            }
+
+            var vehicle = await _vehicleRepository.Getbyid(vehicleId.Value);
 
             var reservation = new RESERVATIONMODEL
             {
-                userid = customerId,
-                vehicleid = vehicleId,
+                userid = customerId.Value,
+                vehicleid = vehicleId.Value,
                 reservedate = reservedDate,
                 duedate = dueDate,
                 price = PricingHelper.CalculatePrice(vehicle, reservedDate, dueDate, null)

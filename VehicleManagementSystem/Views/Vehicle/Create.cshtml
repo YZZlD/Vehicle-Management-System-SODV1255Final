@@ -8,30 +8,37 @@
             <div class="form-group">
                 <label asp-for="Model">Model: </label>
                 <input asp-for="Model" />
+                <span class="field-error" asp-validation-for="Model"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Make">Make: </label>
                 <input asp-for="Make" />
+                <span class="field-error" asp-validation-for="Make"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="LicensePlate">License Plate: </label>
                 <input asp-for="LicensePlate" />
+                <span class="field-error" asp-validation-for="LicensePlate"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="PriceRate">Price Rate ($/day): </label>
                 <input asp-for="PriceRate" />
+                <span class="field-error" asp-validation-for="PriceRate"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="ImageURL">Image URL: </label>
                 <input asp-for="ImageURL" />
+                <span class="field-error" asp-validation-for="ImageURL"></span>
             </div>
 
-            <button class="btn" type="submit">Create Vehicle</button>
-            <a asp-action="Index">Cancel</a>
+            <div class="form-actions">
+                <button class="btn" type="submit">Create Vehicle</button>
+                <a asp-action="Index">Cancel</a>
+            </div>
         </form>
     </div>
 </div>

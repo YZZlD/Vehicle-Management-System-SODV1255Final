@@ -25,12 +25,17 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(VehicleDTO vehicleDTO)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(vehicleDTO);
+            }
+
             var vehicle = new VEHICLEMODEL
             {
                 make = vehicleDTO.Make,
                 model = vehicleDTO.Model,
                 licenseplate = vehicleDTO.LicensePlate,
-                price = vehicleDTO.PriceRate,
+                price = (double)vehicleDTO.PriceRate,
                 imagelinkplaintext = vehicleDTO.ImageURL
             };
 
@@ -40,6 +45,7 @@ namespace VehicleManagementSystem.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
+
             var vehicle = await _vehicleRepository.Getbyid(id);
             if(vehicle == null) return NotFound();
 
@@ -47,7 +53,7 @@ namespace VehicleManagementSystem.Controllers
             {
                 Make = vehicle.make,
                 Model = vehicle.model,
-                PriceRate = vehicle.price,
+                PriceRate = (decimal)vehicle.price,
                 ImageURL = vehicle.imagelinkplaintext,
                 LicensePlate = vehicle.licenseplate
             };
@@ -58,12 +64,17 @@ namespace VehicleManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, VehicleDTO vehicleDTO)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(vehicleDTO);
+            }
+
             var vehicle = await _vehicleRepository.Getbyid(id);
 
             vehicle.make = vehicleDTO.Make;
             vehicle.model = vehicleDTO.Model;
             vehicle.licenseplate = vehicleDTO.LicensePlate;
-            vehicle.price = vehicleDTO.PriceRate;
+            vehicle.price = (double)vehicleDTO.PriceRate;
             vehicle.imagelinkplaintext = vehicleDTO.ImageURL;
 
             await _vehicleRepository.EditVehicle(vehicle);

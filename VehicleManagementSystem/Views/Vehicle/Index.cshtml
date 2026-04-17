@@ -1,4 +1,5 @@
-@model List<VehicleManagementSystem.src.Models.VEHICLEMODEL>
+@using VehicleManagementSystem.Helpers;
+@model List<VehicleManagementSystem.src.Models.VEHICLEMODEL>;
 
 <div class="page-header">
     <h2>Vehicles</h2>
@@ -8,7 +9,7 @@
 <div class="vehicle-grid">
     @foreach(var vehicle in Model)
     {
-        <div class="vehicle-card" style="background-image: url('@(vehicle.imagelinkplaintext ?? "/[PLACEHOLDER IMAGE LOCATION]")')"">
+        <div class="vehicle-card" style="background-image: url('@ImageValidationHelper.GetVehicleImage(vehicle.imagelinkplaintext)')"">
             <div class="vehicle-overlay">
                 <p><strong>Vehicle:</strong> @vehicle.make @vehicle.model</p>
                 <p><strong>Plate #:</strong> @vehicle.licenseplate</p>
