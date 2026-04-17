@@ -1,4 +1,4 @@
-using VehicleManagementSystem.src.Models
+using VehicleManagementSystem.src.Models;
 
 namespace VehicleManagementSystem.ViewModels
 {

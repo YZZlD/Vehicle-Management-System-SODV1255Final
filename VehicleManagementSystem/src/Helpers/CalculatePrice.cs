@@ -9,7 +9,7 @@ namespace VehicleManagementSystem.Helpers
         {
             // Final value represents tax for now will probably add tax to reservation object for different tax juristrictions
             const double taxRate = 1.05;
-            double priceTotal = vehicle.pricerate * (dueDate - reservedDate).Days * taxRate;
+            double priceTotal = vehicle.price * (dueDate - reservedDate).Days * taxRate;
 
             if(returnedDate.HasValue && returnedDate.Value > dueDate)
             {
