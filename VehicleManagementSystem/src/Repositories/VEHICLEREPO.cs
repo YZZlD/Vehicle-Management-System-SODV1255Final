@@ -29,7 +29,7 @@ namespace VehicleManagementSystem.src.Repositories
         public async Task EditVehicle(VEHICLEMODEL newvehicle)
         {
             VEHICLEMODEL vehiclecheck = await appdb.vehiclemodel.Where(u => u.vehicleid == newvehicle.vehicleid).FirstOrDefaultAsync();
-            if (vehiclecheck != null)
+            if (vehiclecheck == null)
             {
                 Console.WriteLine("No vehicle found"); return;
             }

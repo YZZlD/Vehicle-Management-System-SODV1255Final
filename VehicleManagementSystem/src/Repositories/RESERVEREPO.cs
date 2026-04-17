@@ -25,7 +25,7 @@ namespace VehicleManagementSystem.src.Repositories
         }
         public async Task<RESERVATIONMODEL?> getbyid(int id)
         {
-            return await appdb.reservationmodel.Include(b => b.vehicle).Include(b => b.userid).FirstOrDefaultAsync(u => u.reservationid == id);
+            return await appdb.reservationmodel.Include(b => b.vehicle).Include(b => b.user).FirstOrDefaultAsync(u => u.reservationid == id);
         }
         public async Task Deletebyid(int id)
         {
