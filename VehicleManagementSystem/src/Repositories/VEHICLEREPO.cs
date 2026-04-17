@@ -37,6 +37,8 @@ namespace VehicleManagementSystem.src.Repositories
             .SetProperty(u => u.licenseplate, newvehicle.licenseplate)
             .SetProperty(u=> u.model, newvehicle.model)
             .SetProperty(u=>u.make, newvehicle.make)
+            .SetProperty(u=> u.imagelinkplaintext, newvehicle.imagelinkplaintext)
+            .SetProperty(u=>u.price, newvehicle.price)
             );
             await appdb.SaveChangesAsync();
         }
