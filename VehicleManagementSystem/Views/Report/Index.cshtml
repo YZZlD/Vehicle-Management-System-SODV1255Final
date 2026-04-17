@@ -1,4 +1,4 @@
-@* @model VehicleManagementSystem.Models.ReportViewModel *@
+@model VehicleManagementSystem.ViewModels.ReportViewModel
 
 <div>
     <div>
@@ -60,11 +60,11 @@
                     @foreach(var reservation in Model.Reservations)
                     {
                         <tr>
-                            <td>@reservation.Customer.FirstName @reservation.Customer.LastName</td>
-                            <td>@reservation.Vehicle.Make @reservation.Vehicle.Model </td>
-                            <td>@reservation.ReservedDate.ToString("MMM dd, yyyy")</td>
-                            <td>@reservation.DueDate.ToString("MMM dd, yyyy")</td>
-                            <td>@reservation.PriceTotal.ToString("C")</td>
+                            <td>@reservation.user?.fname @reservation.user?.lname</td>
+                            <td>@reservation.vehicle.make @reservation.vehicle.model </td>
+                            <td>@reservation.reservedate.ToString("MMM dd, yyyy")</td>
+                            <td>@reservation.duedate.ToString("MMM dd, yyyy")</td>
+                            <td>@reservation.price.ToString("C")</td>
                         </tr>
                     }
                 </tbody>

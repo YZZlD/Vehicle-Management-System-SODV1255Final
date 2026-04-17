@@ -1,19 +1,19 @@
-@* @model VehicleManagementSystem.Models.Reservation *@
+@model VehicleManagementSystem.src.Models.RESERVATIONMODEL
 
 <h1>Delete Reservation</h1>
 
 <p>Are you sure you want to delete this reservation?</p>
 
 <div>
-    <strong>Customer Name:</strong> @Model.Customer.FirstName @Model.Customer.LastName <br/>
-    <strong>Vehicle Name:</strong> @Model.Vehicle.Make @Model.Vehicle.Model<br/>
-    <strong>ReservedDate:</strong> @Model.ReservedDate.ToString("MMM dd, yyyy") <br/>
-    <strong>Due Date:</strong> @Model.DueDate.ToString("MMM dd, yyyy") <br />
-    <strong>Total Price:</strong>@Model.TotalPrice.ToString("C") <br />
+    <strong>Customer Name:</strong> @Model.user.fname @Model.user.lname <br/>
+    <strong>Vehicle Name:</strong> @Model.vehicle.make @Model.vehicle.model<br/>
+    <strong>ReservedDate:</strong> @Model.reservedate.ToString("MMM dd, yyyy") <br/>
+    <strong>Due Date:</strong> @Model.duedate.ToString("MMM dd, yyyy") <br />
+    <strong>Total Price:</strong>@Model.price.ToString("C") <br />
 </div>
 
 <form asp-action="DeleteReservation" method="post">
-    <input type="hidden" name="id" value="@Model.ReservationId" />
+    <input type="hidden" name="id" value="@Model.reservationid" />
     <button type="submit" >Confirm Delete</button>
     <a asp-action="Index">Cancel</a>
 </form>

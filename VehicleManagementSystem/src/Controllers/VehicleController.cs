@@ -42,7 +42,17 @@ namespace VehicleManagementSystem.Controllers
         {
             var vehicle = await _vehicleRepository.Getbyid(id);
             if(vehicle == null) return NotFound();
-            return View(vehicle);
+
+            var vehicleDTO = new VehicleDTO
+            {
+                Make = vehicle.make,
+                Model = vehicle.model,
+                PriceRate = vehicle.price,
+                ImageURL = vehicle.imagelinkplaintext,
+                LicensePlate = vehicle.licenseplate
+            };
+
+            return View(vehicleDTO);
         }
 
         [HttpPost]

@@ -1,16 +1,16 @@
-@* @model VehicleManagementSystem.Models.Vehicle *@
+@model VehicleManagementSystem.src.Models.VEHICLEMODEL
 
 <h1>Delete Vehicle</h1>
 
 <p>Are you sure you want to delete this vehicle?</p>
 
 <div>
-    <strong>Vehicle:</strong> @Model.Make @Model.Model <br/>
-    <strong>LicensePlate:</strong> @Model.LicensePlate <br/>
+    <strong>Vehicle:</strong> @Model.make @Model.model <br/>
+    <strong>LicensePlate:</strong> @Model.licenseplate <br/>
 </div>
 
 <form asp-action="DeleteVehicle" method="post">
-    <input type="hidden" name="id" value="@Model.VehicleId" />
+    <input type="hidden" name="id" value="@Model.vehicleid" />
     <button type="submit" >Confirm Delete</button>
     <a asp-action="Index">Cancel</a>
 </form>

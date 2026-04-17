@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 // builder.Services.AddDbContext<VEHICLEMODELDB>(options =>options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 // builder.Services.AddDbContext<USERMODELDB>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 // builder.Services.AddDbContext<RESERVATIONDB>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDbContext<APPCONTEXTDB>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<APPCONTEXTDB>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("PersonalConnection")));
 
 // builder.Services.AddIdentity<STAFFMODEL, IdentityRole>(options =>
 // {

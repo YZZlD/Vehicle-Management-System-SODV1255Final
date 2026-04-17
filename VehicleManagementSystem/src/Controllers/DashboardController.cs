@@ -27,6 +27,10 @@ namespace VehicleManagementSystem.Controllers
 
             var model = new DashboardViewModel
             {
+                VehicleCount = vehicles.Count(),
+                CustomerCount = customers.Count(),
+                ReservationCount = reservations.Count(),
+
                 Vehicles = vehicles.Take(3).ToList(),
                 Customers = customers.Take(3).ToList(),
                 Reservations = reservations.Take(3).ToList(),

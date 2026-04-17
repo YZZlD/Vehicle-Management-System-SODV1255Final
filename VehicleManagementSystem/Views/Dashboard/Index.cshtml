@@ -1,10 +1,10 @@
-@* @model VehicleManagementSystem.Model.DashboardViewModel *@
+@model VehicleManagementSystem.ViewModels.DashboardViewModel
 
 <div>
     <div>
         <div>
             <h1>Vehicles</h1>
-            <h1>@Model.Vehicles.Count</h1>
+            <h1>@Model.VehicleCount</h1>
             <a asp-controller="Vehicle" asp-action="Create">+ ADD VEHICLE</a>
         </div>
         <div>
@@ -12,11 +12,16 @@
             <div>
                 @foreach(var vehicle in Model.Vehicles)
                 {
-                    <div style="background-image: url('@(vehicle.ImageUrl ?? "/[PLACEHOLDER IMAGE LOCATION]")')">
+                    <div style="background-image: url('@(vehicle.imagelinkplaintext ?? "/[PLACEHOLDER IMAGE LOCATION]")')">
                         <div>
-                            <h3>@vehicle.Make @vehicle.Model</h3>
-                            <p>@vehicle.LicensePlate</p>
-                            <p>@vehicle.PriceRate</p>
+                            <h3>@vehicle.make @vehicle.model</h3>
+                            <p>@vehicle.licenseplate</p>
+                            <p>@vehicle.price</p>
+                        </div>
+
+                        <div>
+                            <a asp-controller="Vehicle" asp-action="Edit" asp-route-id="@vehicle.vehicleid">Edit Vehicle</a>
+                            <a asp-controller="Vehicle" asp-action="Delete" asp-route-id="@vehicle.vehicleid">Delete Vehicle</a>
                         </div>
                     </div>
                 }
@@ -27,7 +32,7 @@
     <div>
         <div>
             <h1>Customers</h1>
-            <h1>@Model.Customers.Count</h1>
+            <h1>@Model.CustomerCount</h1>
             <a asp-controller="Customer" asp-action="Create">+ ADD CUSTOMER</a>
         </div>
         <div>
@@ -38,6 +43,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>Age</th>
                             <th>Actions</th>
                         </tr>
                     </tr>
@@ -52,8 +58,8 @@
                             <td>@customer.phonenumber</td>
                             <td>@customer.age</td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@customer.userid">Edit Customer</a>
-                                <a asp-action="Delete" asp-route-id="@customer.userid">Delete Customer</a>
+                                <a asp-controller="Customer" asp-action="Edit" asp-route-id="@customer.userid">Edit Customer</a>
+                                <a asp-controller="Customer" asp-action="Delete" asp-route-id="@customer.userid">Delete Customer</a>
                             </td>
                         </tr>
                     }
@@ -65,12 +71,44 @@
     <div>
         <div>
             <h1>Reservations</h1>
-            <h1>@Model.Reservations.Count</h1>
-            <a asp-controller="Reservation" asp-action="Create">+ ADD RESERVATION</a>
+            <h1>@Model.ReservationCount</h1>
+            <a asp-controller="Reservation" asp-action="SelectDate">+ ADD RESERVATION</a>
         </div>
 
         <div>
-            @* RESERVATIONS UI GOES HERE *@
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Vehicle</th>
+                            <th>Reserved Date</th>
+                            <th>Due Date</th>
+                            <td>Returned Date</td>
+                            <th>Price Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach(var reservation in Model.Reservations)
+                        {
+                            <tr>
+                                <td>@reservation.user?.fname @reservation.user?.lname</td>
+                                <td>@reservation.vehicle?.make @reservation.vehicle?.model </td>
+                                <td>@reservation.reservedate.ToString("MMM dd, yyyy")</td>
+                                <td>@reservation.duedate.ToString("MMM dd, yyyy")</td>
+                                <td>@(reservation.returneddate.HasValue ? reservation.returneddate.Value.ToString("MMM dd, yyyy") : "Not Returned")</td>
+                                <td>@reservation.price.ToString("C")</td>
+                                <td>
+                                    <a asp-controller="Reservation" asp-action="Edit" asp-route-id="@reservation.reservationid">Edit Reservation</a>
+                                    <a asp-controller="Reservation" asp-action="Delete" asp-route-id="@reservation.reservationid">Delete Reservation</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -84,9 +122,9 @@
             @foreach(var reservation in @Model.UpcomingRentals)
             {
                 <div>
-                    <p>@reservation.Customer?.FirstName @reservation.Customer?.LastName</p>
-                    <p>@reservation.Vehicle?.Make @reservation.Vehicle?.Model</p>
-                    <p>@reservation.DueDate.ToString("MMM dd, yyyy")</p>
+                    <p>@reservation.user?.fname @reservation.user?.lname</p>
+                    <p>@reservation.vehicle?.make @reservation.vehicle?.model</p>
+                    <p>@reservation.duedate.ToString("MMM dd, yyyy")</p>
                 </div>
             }
         </div>
@@ -98,9 +136,9 @@
         @foreach(var reservation in @Model.OverdueRentals)
         {
             <div>
-                <p>@reservation.Customer?.FirstName @reservation.Customer?.LastName</p>
-                <p>@reservation.Vehicle?.Make @reservation.Vehicle?.Model</p>
-                <p>@reservation.DueDate.ToString("MMM dd, yyyy")</p>
+                <p>@reservation.user?.fname @reservation.user?.lname</p>
+                <p>@reservation.vehicle?.make @reservation.vehicle?.model</p>
+                <p>@reservation.duedate.ToString("MMM dd, yyyy")</p>
                 @* THIS WILL BE STYLED DANGER STYLE *@
             </div>
         }

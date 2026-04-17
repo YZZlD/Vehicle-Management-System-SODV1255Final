@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using VehicleManagementSystem.Helpers;
 using VehicleManagementSystem.src.Models;
 using VehicleManagementSystem.src.Repositories;
+using System.Linq;
 
 namespace VehicleManagementSystem.Controllers
 {
@@ -47,8 +49,19 @@ namespace VehicleManagementSystem.Controllers
                                         .Where(vehicle => !reservedVehicleIds.Contains(vehicle.vehicleid))
                                         .ToList();
 
-            ViewBag.Customers = await _customerRepository.GetAllUsers();
-            ViewBag.Vehicles = availableVehicles;
+            var users = await _customerRepository.GetAllUsers();
+            ViewBag.Customers = users.Select(user => new SelectListItem
+            {
+                Value = user.userid.ToString(),
+                Text = user.fname + user.lname
+            }).ToList();
+
+            ViewBag.Vehicles = availableVehicles.Select(vehicle => new SelectListItem
+            {
+                Value = vehicle.vehicleid.ToString(),
+                Text = vehicle.make + vehicle.model
+            }).ToList();
+
             ViewBag.ReservedDate = reservedDate;
             ViewBag.DueDate = dueDate;
 
@@ -77,7 +90,7 @@ namespace VehicleManagementSystem.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var reservation = _reservationRepository.getbyid(id);
+            var reservation = await _reservationRepository.getbyid(id);
 
             if(reservation == null) return NotFound();
             return View(reservation);
@@ -101,8 +114,16 @@ namespace VehicleManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
         public async Task<IActionResult> Delete(int id)
+        {
+            var reservation = await _reservationRepository.getbyid(id);
+            if(reservation == null) return NotFound();
+
+            return View(reservation);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteReservation(int id)
         {
             await _reservationRepository.Deletebyid(id);
 

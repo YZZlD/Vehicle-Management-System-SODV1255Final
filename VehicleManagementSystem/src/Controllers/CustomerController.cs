@@ -44,8 +44,19 @@ namespace VehicleManagementSystem.Controllers
             var customer = await _customerRepository.getuserbyid(id);
             //THIS WILL BE REPLACED FOR A 404 ROUTE FOR HANDLING NOT FOUND
             //MOST LIKELY GOING TO BE DONE THROUGH REDIRECTSWITHSTATUSCODES SO THIS SHOULD NOT CHANGE
+
             if (customer == null) return NotFound();
-            return View(customer);
+
+            var customerDTO = new CustomerDTO
+            {
+                FirstName = customer.fname,
+                LastName = customer.lname,
+                Email = customer.email,
+                PhoneNumber = customer.phonenumber,
+                Age = customer.age
+            };
+
+            return View(customerDTO);
         }
 
         [HttpPost]
