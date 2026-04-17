@@ -24,5 +24,10 @@ namespace VehicleManagementSystem.src.Repositories
             await appcontextdb.staffmodel.AddAsync(newstaff);
             await appcontextdb.SaveChangesAsync();
         }
+        public async Task<STAFFMODEL> checkcreds(string username, string password)
+        {
+            return await appcontextdb.staffmodel.FirstOrDefaultAsync(u=> u.username == username  && u.password == password);
+
+        }
     }
 }
