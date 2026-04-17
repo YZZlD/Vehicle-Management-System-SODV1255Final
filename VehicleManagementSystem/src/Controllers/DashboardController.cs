@@ -42,6 +42,7 @@ namespace VehicleManagementSystem.Controllers
 
                 OverdueRentals = reservations
                     .Where(reservation => reservation.duedate < now)
+                    .Where(reservation => reservation.returneddate == null)
                     .OrderBy(reservation => reservation.duedate)
                     .ToList()
             };
