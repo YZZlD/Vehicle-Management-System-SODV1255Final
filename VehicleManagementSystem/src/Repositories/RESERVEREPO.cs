@@ -11,12 +11,16 @@ namespace VehicleManagementSystem.src.Repositories
 
         public async Task<List<RESERVATIONMODEL>> index()
         {
-            return await appdb.reservationmodel.ToListAsync();
+            return await appdb.reservationmodel.Include(b=>b.vehicle).Include(b=>b.user).ToListAsync();
         }
         public async void Addreserve(RESERVATIONMODEL newreservation)
         {
             await appdb.reservationmodel.AddAsync(newreservation);
             await appdb.SaveChangesAsync();
+        }
+        public async Task<RESERVATIONMODEL?> getbyid(int id)
+        {
+            return await appdb.reservationmodel.Include(b => b.vehicle).Include(b => b.userid).FirstOrDefaultAsync(u => u.reservationid == id);
         }
         public async void Deletebyid(int id)
         {

@@ -12,6 +12,10 @@ namespace VehicleManagementSystem.src.Repositories
         {
             return await appdb.vehiclemodel.ToListAsync();
         }
+        public async Task<VEHICLEMODEL?> Getbyid(int id)
+        {
+            return await appdb.vehiclemodel.FirstOrDefaultAsync(u => u.vehicleid == id);
+        }
         public async void AddVehicle(VEHICLEMODEL newvehicle)
         {
             await appdb.vehiclemodel.AddAsync(newvehicle);

@@ -14,7 +14,7 @@ namespace VehicleManagementSystem.src.Repositories
             return await appcontextdb.staffmodel.ToListAsync();
         }
 
-        public async Task<Models.STAFFMODEL> GetStaffById(int id)
+        public async Task<Models.STAFFMODEL?> GetStaffById(int id)
         {
             //GET BY ID
             return await appcontextdb.staffmodel.FirstOrDefaultAsync(u => u.staffid == id);
@@ -24,7 +24,7 @@ namespace VehicleManagementSystem.src.Repositories
             await appcontextdb.staffmodel.AddAsync(newstaff);
             await appcontextdb.SaveChangesAsync();
         }
-        public async Task<STAFFMODEL> checkcreds(string username, string password)
+        public async Task<STAFFMODEL?> checkcreds(string username, string password)
         {
             return await appcontextdb.staffmodel.FirstOrDefaultAsync(u=> u.username == username  && u.password == password);
 

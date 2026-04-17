@@ -35,7 +35,7 @@ namespace VehicleManagementSystem.src.Repositories
 
         await appcontextdb.SaveChangesAsync();
         }   
-        public async Task<USERMODEL> getuserbyid(int id)
+        public async Task<USERMODEL?> getuserbyid(int id)
         {
             return await appcontextdb.usermodel.FirstOrDefaultAsync( u => u.userid == id);
         }
