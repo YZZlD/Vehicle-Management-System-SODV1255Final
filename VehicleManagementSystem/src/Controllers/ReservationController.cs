@@ -1,7 +1,5 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.VisualBasic;
+using VehicleManagementSystem.Helpers;
 
 namespace VehicleManagementSystem.Controllers
 {
@@ -63,7 +61,7 @@ namespace VehicleManagementSystem.Controllers
                 VehicleId = vehicleId,
                 ReservedDate = reservedDate,
                 DueDate = dueDate,
-                PriceTotal = CalculatePrice(vehicle, reservedDate, dueDate)
+                PriceTotal = CalculatePrice(vehicle, reservedDate, dueDate, null)
             };
 
             await _reservationRepository.Add(reservation);
