@@ -42,7 +42,6 @@ namespace VehicleManagementSystem.src.Repositories
             }
             await appdb.reservationmodel.Where(u => u.reservationid == updatedreservation.reservationid).ExecuteUpdateAsync(
                 u => u
-                .SetProperty(u => u.reservedate, updatedreservation.reservedate)
                 .SetProperty(u => u.userid, updatedreservation.userid)
                 .SetProperty(u => u.vehicleid, updatedreservation.vehicleid)
                 .SetProperty(u => u.price, updatedreservation.price)
