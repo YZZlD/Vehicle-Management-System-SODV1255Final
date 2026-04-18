@@ -78,6 +78,7 @@ namespace VehicleManagementSystem.Controllers
             customer.lname = customerDTO.LastName;
             customer.phonenumber = customerDTO.PhoneNumber;
             customer.email = customerDTO.Email;
+            customer.age = customerDTO.Age;
 
             await _customerRepository.Edit(customer);
             return RedirectToAction("Index");
