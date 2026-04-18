@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using VehicleManagementSystem.Helpers;
 using VehicleManagementSystem.src.Models;
 using VehicleManagementSystem.src.Repositories;
-using System.Linq;
 
 namespace VehicleManagementSystem.Controllers
 {

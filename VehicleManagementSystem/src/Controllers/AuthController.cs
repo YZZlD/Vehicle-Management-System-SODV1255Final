@@ -30,7 +30,7 @@ namespace VehicleManagementSystem.Controllers
             //Rereturn the view if the credentials don't register in the repository with error information
             if (user == null)
             {
-                ViewBag.Error = "Username or Password incorrect";
+                ViewBag.Error = "Username or Password Incorrect";
                 return View();
             }
 

@@ -12,6 +12,7 @@ namespace VehicleManagementSystem.Helpers
 
             if(returnedDate.HasValue && returnedDate.Value > dueDate)
             {
+                //This is overdue fee
                 priceTotal += 50;
             }
 
